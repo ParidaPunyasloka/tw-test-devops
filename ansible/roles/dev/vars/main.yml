@@ -1,0 +1,8 @@
+resourceGroup: dev-tw
+storageAccountName: devtwstorageaccount001
+virtualNetwork: devtwvn001
+subnetName: devtwsubnet001
+publicIPName: devtwpublicip001
+securityGroupName: devtwsecgroup001
+networkInferace: devtwnic001
+webAppName: devWebApp01

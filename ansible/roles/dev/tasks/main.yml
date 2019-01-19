@@ -2,17 +2,63 @@
   include_vars:
     file: "../vars/secure.yml"
 
+- name: Create storage account
+  azure_rm_storageaccount:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ storageAccountName }}"
+    account_type: Standard_LRS
+
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ virtualNetwork }}"
+    address_prefixes: "10.10.0.0/16"
+
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ subnetName }}"
+    address_prefix: "10.10.0.0/24"
+    virtual_network: "{{ virtualNetwork }}"
+
+- name: Create public ip
+  azure_rm_publicipaddress:
+    resource_group: "{{ resourceGroup }}"
+    allocation_method: Static
+    name: "{{ publicIPName }}"
+
+- name: Create security group that allows SSH
+  azure_rm_securitygroup:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ securityGroupName }}"
+    rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 101
+        direction: Inbound
+
+- name: Create NIC
+  azure_rm_networkinterface:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ networkInferace }}"
+    virtual_network: "{{ virtualNetwork }}"
+    subnet: "{{ subnetName }}"
+    public_ip_name: "{{ publicIPName }}"
+    security_group: "{{ securityGroupName }}"
+
 - name: Azure
   azure_rm_virtualmachine:
-    resource_group: dev-tw
-    name: devWebApp01
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ webAppName }}"
     vm_size: Standard_B1ms
-    storage_account: devtwstorage001
-    storage_container: devtwblob
-    storage_blob: devvm001.vhd
+    storage_account: "{{ storageAccountName }}"
+#    storage_container: devtwblob
+#    storage_blob: devvm001.vhd
     admin_username: "{{ admin_username }}"
     admin_password: "{{ admin_password }}"
-    network_interfaces: dev-nic
+    network_interfaces: "{{ networkInferace }}"
     image:
       offer: UbuntuServer 
       publisher: Canonical
