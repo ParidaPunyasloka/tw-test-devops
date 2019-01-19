@@ -1,18 +1,20 @@
-- name: Create virtual machine
+- name: include vars
   include_vars:
-    file: ../vars/secure.yml
+    file: "../vars/secure.yml"
+
+- name: Azure
   azure_rm_virtualmachine:
     resource_group: dev-tw
-    name: dev_webapp_static_01
+    name: devWebApp01
     vm_size: Standard_B1ms
-    storage_account: devaccount001
-    storage_container: devvm001
+    storage_account: devtwstorage001
+    storage_container: devtwblob
     storage_blob: devvm001.vhd
     admin_username: "{{ admin_username }}"
     admin_password: "{{ admin_password }}"
-    network_interfaces: devnic001
+    network_interfaces: dev-nic
     image:
-      offer: Ubuntu Server
+      offer: UbuntuServer 
       publisher: Canonical
-      sku: '18.04'
+      sku: '18.04-LTS'
       version: latest
