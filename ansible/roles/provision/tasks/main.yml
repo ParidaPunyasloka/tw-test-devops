@@ -1,0 +1,16 @@
+- name: Create virtual machine
+  azure_rm_virtualmachine:
+    resource_group: Testing
+    name: dev_webapp_static_01
+    vm_size: Standard_B1ms
+    storage_account: devaccount001
+    storage_container: devvm001
+    storage_blob: devvm001.vhd
+    admin_username: {{ admin_username }}
+    admin_password: {{ admin_password }}
+    network_interfaces: devnic001
+    image:
+      offer: Ubuntu Server
+      publisher: Canonical
+      sku: '18.04'
+      version: latest
