@@ -46,10 +46,10 @@
     virtual_network: "{{ virtualNetwork }}"
     subnet: "{{ subnetName }}"
     ip_configurations:
-      name: "{{ ipconfigurationName }}"
-      public_ip_address_name: "{{ publicIPName }}"
-      public_ip_allocation_method: Dynamic
-      primary: yes
+      - name: "{{ ipconfigurationName }}"
+        public_ip_address_name: "{{ publicIPName }}"
+        public_ip_allocation_method: Dynamic
+        primary: yes
     security_group: "{{ securityGroupName }}"
 
 - name: Azure
