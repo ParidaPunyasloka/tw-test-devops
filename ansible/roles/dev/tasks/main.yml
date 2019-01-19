@@ -45,7 +45,11 @@
     name: "{{ networkInferace }}"
     virtual_network: "{{ virtualNetwork }}"
     subnet: "{{ subnetName }}"
-    public_ip_name: "{{ publicIPName }}"
+    ip_configurations:
+      name: "{{ ipconfigurationName }}"
+      public_ip_address_name: "{{ publicIPName }}"
+      public_ip_allocation_method: Dynamic
+      primary: yes
     security_group: "{{ securityGroupName }}"
 
 - name: Azure

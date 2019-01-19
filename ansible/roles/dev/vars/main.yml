@@ -6,3 +6,4 @@ publicIPName: devtwpublicip001
 securityGroupName: devtwsecgroup001
 networkInferace: devtwnic001
 webAppName: devWebApp01
+ipconfigurationName: ip_config_dev
