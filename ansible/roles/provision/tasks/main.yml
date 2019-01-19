@@ -1,6 +1,6 @@
 - name: Create virtual machine
   azure_rm_virtualmachine:
-    resource_group: Testing
+    resource_group: dev-tw
     name: dev_webapp_static_01
     vm_size: Standard_B1ms
     storage_account: devaccount001
