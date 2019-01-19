@@ -1,4 +1,6 @@
 - name: Create virtual machine
+  include_vars:
+    file: ../vars/secure.yml
   azure_rm_virtualmachine:
     resource_group: dev-tw
     name: dev_webapp_static_01
