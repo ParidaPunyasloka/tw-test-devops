@@ -55,7 +55,7 @@
 - name: Azure
   azure_rm_virtualmachine:
     resource_group: "{{ resourceGroup }}"
-    name: "{{ webAppName }}"
+    name: "{{ VMName }}"
     vm_size: Standard_B1ms
     storage_account: "{{ storageAccountName }}"
 #    storage_container: devtwblob
