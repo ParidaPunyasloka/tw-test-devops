@@ -2,11 +2,11 @@
 - hosts: env_dev_staticApp
   remote_user: tw_test_devops_admin 
   roles:
-    - role: dev_static
-      tags: ['dev','static']
+     - role: dev_static
+       tags: ['dev','static']
 
 - hosts: env_dev_webApp
   remote_user: tw_test_devops_admin
   roles:
-    - role: dev_web
-      tags: ['dev','web']
+     - role: dev_web
+       tags: ['dev','web']
