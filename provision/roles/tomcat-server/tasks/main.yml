@@ -4,7 +4,7 @@
     file: "../vars/secure.yml"
     
 - name: Install Java 1.7
-  apt: name=java-1.7.0-openjdk state=present
+  apt: name=openjdk-7-jre state=present
   become: yes
 
 - name: add group "tomcat"
@@ -36,7 +36,7 @@
   template: src=server.xml dest=/usr/share/tomcat/conf/
   notify: restart tomcat
   become: yes
-  
+
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
   notify: restart tomcat
