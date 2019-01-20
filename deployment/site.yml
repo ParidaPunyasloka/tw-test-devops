@@ -1,8 +1,10 @@
 ---
 - hosts: env_dev_staticApp
+  remote_user: tw_test_devops_admin 
   roles:
      - dev_static
 
 - hosts: env_dev_webApp
+  remote_user: tw_test_devops_admin
   roles:
      - dev_web
