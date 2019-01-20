@@ -58,8 +58,8 @@
     name: "{{ VMName }}"
     vm_size: Standard_B1ms
     storage_account: "{{ storageAccountName }}"
-#    storage_container: devtwblob
-#    storage_blob: devvm001.vhd
+    tags:
+      environment: "{{ environment }}_{{ type }}"
     admin_username: "{{ admin_username }}"
     admin_password: "{{ admin_password }}"
     network_interfaces: "{{ networkInferace }}"

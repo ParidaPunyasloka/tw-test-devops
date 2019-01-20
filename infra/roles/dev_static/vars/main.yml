@@ -5,5 +5,7 @@ subnetName: devtwsubnet001
 publicIPName: devtwpublicip001
 securityGroupName: devtwsecgroup001
 networkInferace: devtwnic001
-VMName: devWebApp01
-ipconfigurationName: ip_config_dev
+VMName: devStaticApp01
+ipconfigurationName: ip_config_dev_static
+environment: dev
+type: staticApp

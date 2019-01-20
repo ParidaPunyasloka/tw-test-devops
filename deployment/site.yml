@@ -1,0 +1,8 @@
+---
+- hosts: dev_staticApp
+  roles:
+     - dev_static
+
+- hosts: dev_webApp
+  roles:
+     - dev_web
