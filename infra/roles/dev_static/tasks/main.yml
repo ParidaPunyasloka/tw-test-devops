@@ -59,7 +59,7 @@
     vm_size: Standard_B1ms
     storage_account: "{{ storageAccountName }}"
     tags:
-      environment: "{{ environment }}_{{ type }}"
+      "{{ env_group }}": "{{ type }}"
     admin_username: "{{ admin_username }}"
     ssh_password_enabled: false
     ssh_public_keys: 
