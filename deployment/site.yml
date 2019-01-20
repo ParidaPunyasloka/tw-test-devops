@@ -1,8 +1,8 @@
 ---
-- hosts: dev_staticApp
+- hosts: env_dev_staticApp
   roles:
      - dev_static
 
-- hosts: dev_webApp
+- hosts: env_dev_webApp
   roles:
      - dev_web

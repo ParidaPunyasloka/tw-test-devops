@@ -7,5 +7,4 @@ securityGroupName: devtwsecgroup001
 networkInferace: devtwnic001
 VMName: devStaticApp01
 ipconfigurationName: ip_config_dev_static
-env_group: dev
-type: staticApp
+type: dev_staticApp

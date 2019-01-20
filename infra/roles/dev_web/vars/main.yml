@@ -7,5 +7,4 @@ securityGroupName: devtwsecgroup001
 networkInferace: devtwnic002
 VMName: devWebApp01
 ipconfigurationName: ip_config_dev_web
-env_group: dev
-type: webApp
+type: dev_webApp
