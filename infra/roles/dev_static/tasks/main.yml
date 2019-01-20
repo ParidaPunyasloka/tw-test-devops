@@ -27,7 +27,7 @@
     allocation_method: Static
     name: "{{ publicIPName }}"
 
-- name: Create security group that allows SSH
+- name: Create security group that allows SSH, Apache HTTP and Apache HTTPS
   azure_rm_securitygroup:
     resource_group: "{{ resourceGroup }}"
     name: "{{ securityGroupName }}"
@@ -37,6 +37,18 @@
         destination_port_range: 22
         access: Allow
         priority: 101
+        direction: Inbound
+      - name: Apache_HTTP
+        protocol: Tcp
+        destination_port_range: 8080
+        access: Allow
+        priority: 102
+        direction: Inbound
+      - name: Apache_HTTPS
+        protocol: Tcp
+        destination_port_range: 8443
+        access: Allow
+        priority: 103
         direction: Inbound
 
 - name: Create NIC

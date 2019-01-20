@@ -1,1 +1,4 @@
+webapp_name: companyNews
+webapp_source_file_path: "~/artifacts/{{ webapp_name }}.war"
+webapp_destination_file_path: "{{ webapp_destination_folder }}/{{ webapp_name }}.war"
 
