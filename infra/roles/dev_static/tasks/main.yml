@@ -1,3 +1,4 @@
+---
 - name: include vars
   include_vars:
     file: "../vars/secure.yml"

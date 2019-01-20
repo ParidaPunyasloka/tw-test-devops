@@ -1,4 +1,8 @@
 ---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+    
 - name: Install Java 1.7
   apt: name=java-1.7.0-openjdk state=present
 
