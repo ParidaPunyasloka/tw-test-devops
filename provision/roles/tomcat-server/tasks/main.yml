@@ -46,7 +46,7 @@
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
   become: yes
 
-  - name: Install Tomcat init script
+- name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
   become: yes
 
