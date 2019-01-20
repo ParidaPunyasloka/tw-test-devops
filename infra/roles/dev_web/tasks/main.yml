@@ -61,7 +61,8 @@
     tags:
       environment: "{{ environment }}_{{ type }}"
     admin_username: "{{ admin_username }}"
-    admin_password: "{{ admin_password }}"
+    ssh_password_enabled: false
+    ssh_public_keys: "{{ ssh_keys }}"
     network_interfaces: "{{ networkInferace }}"
     image:
       offer: UbuntuServer 
