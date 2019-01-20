@@ -3,8 +3,8 @@
   include_vars:
     file: "../vars/secure.yml"
     
-- name: Install Java 1.7
-  apt: name=openjdk-7-jre state=present
+- name: Install Java 1.8
+  apt: name=openjdk-8-jre state=present
   become: yes
 
 - name: add group "tomcat"
@@ -43,6 +43,10 @@
   become: yes
 
 - name: Install Tomcat init script
+  copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
+  become: yes
+
+  - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
   become: yes
 
