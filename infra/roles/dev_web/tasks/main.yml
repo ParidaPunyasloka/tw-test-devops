@@ -65,7 +65,7 @@
         primary: yes
     security_group: "{{ securityGroupName }}"
 
-- name: Azure
+- name: Create Virtual Machine
   azure_rm_virtualmachine:
     resource_group: "{{ resourceGroup }}"
     name: "{{ VMName }}"
