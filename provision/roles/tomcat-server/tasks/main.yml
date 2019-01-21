@@ -95,19 +95,21 @@
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
+  become: yes
 
 
 - name: Install Tomcat init script
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
-
+  become: yes
 
 - name: Reload Daemon
   command: systemctl daemon-reload
-
+  become: yes
 
 - name: Start Tomcat
   service: name=tomcat state=started enabled=yes
-  
+  become: yes
 
 - name: wait for tomcat to start
   wait_for: port={{http_port}}
+  become: yes
