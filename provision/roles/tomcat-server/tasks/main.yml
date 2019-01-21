@@ -12,24 +12,58 @@
   become: yes
 
 - name: add user "tomcat"
-  user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
+  user: name=tomcat group=tomcat home=/opt/tomcat createhome=no shell=/bin/false
   become: yes
   become_method: sudo
 
 - name: Download Tomcat
-  get_url: url=http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.61/bin/apache-tomcat-7.0.61.tar.gz dest=/opt/apache-tomcat-7.0.61.tar.gz
+  get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/opt/apache-tomcat-8.5.37.tar.gz
   become: yes
 
 - name: Extract archive
   command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-7.0.61.tar.gz -C /opt/ creates=/opt/apache-tomcat-7.0.61
-  become: yes
-
-- name: Symlink install directory
-  file: src=/opt/apache-tomcat-7.0.61 path=/usr/share/tomcat state=link
+  unarchive: 
+    src: /opt/apache-tomcat-8.5.37.tar.gz
+    dest: /opt/tomcat
+    copy: no
+    extra_opts:
+    - --strip-components=1
   become: yes
 
 - name: Change ownership of Tomcat installation
-  file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+  become: yes
+
+- name: Read Access to contents of conf folder
+  file: 
+    path: /opt/tomcat/conf 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes 
+    mode: "g=r"
+  become: yes
+
+- name: execute Access to conf folder
+  file: 
+    path: /opt/tomcat/conf 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes 
+    mode: "g=x"
+  become: yes
+
+- name: Change ownership of Tomcat webapps folder
+  file: path=/opt/tomcat/webapps owner=tomcat group=tomcat state=directory recurse=yes
+  become: yes
+
+- name: Change ownership of Tomcat temp folder
+  file: path=/opt/tomcat/temp owner=tomcat group=tomcat state=directory recurse=yes
+  become: yes
+
+- name: Change ownership of Tomcat logs folder
+  file: path=/opt/tomcat/logs owner=tomcat group=tomcat state=directory recurse=yes
   become: yes
 
 - name: Configure Tomcat server
@@ -46,8 +80,8 @@
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
   become: yes
 
-- name: Install Tomcat init script
-  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+- name: Release Daemon
+  command: systemctl daemon-reload
   become: yes
 
 - name: Start Tomcat
