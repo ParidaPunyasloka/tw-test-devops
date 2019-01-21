@@ -17,9 +17,7 @@ ExecStop=/opt/tomcat/bin/shutdown.sh
 
 User=tomcat
 Group=tomcat
-UMask=0007
-RestartSec=10
-Restart=always
+
 
 [Install]
 WantedBy=multi-user.target

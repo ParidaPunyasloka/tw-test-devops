@@ -4,7 +4,7 @@
     file: "../vars/secure.yml"
     
 - name: Install Java 1.8
-  apt: name=openjdk-8-jre state=present
+  apt: name=openjdk-8-jdk state=present
   become: yes
 
 - name: add group "tomcat"
@@ -103,9 +103,9 @@
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
   become: yes
 
-- name: Install Tomcat init script
-  copy: src=java.security dest=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/security/java.security mode=0755
-  become: yes
+#- name: Install Tomcat init script
+#  copy: src=java.security dest=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/security/java.security mode=0755
+#  become: yes
 
 - name: Reload Daemon
   command: systemctl daemon-reload
