@@ -112,5 +112,6 @@
   service: name=tomcat state=started enabled=yes
   become: yes
 
-- name: Run a script with arguments
-  script: /opt/tomcat/bin/startup.sh
+- name: wait for tomcat to start
+  wait_for: port={{http_port}}
+  become: yes
