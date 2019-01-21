@@ -20,6 +20,13 @@
   get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/opt/apache-tomcat-8.5.37.tar.gz
   become: yes
 
+- name: Create Tomcat installation directory
+  file: 
+    path: /opt/tomcat/
+    state: directory
+    mode: 0755
+  become: yes
+
 - name: Extract archive
   unarchive: 
     src: /opt/apache-tomcat-8.5.37.tar.gz
@@ -54,15 +61,30 @@
   become: yes
 
 - name: Change ownership of Tomcat webapps folder
-  file: path=/opt/tomcat/webapps owner=tomcat group=tomcat state=directory recurse=yes
+  file: 
+    path: /opt/tomcat/webapps 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
   become: yes
 
 - name: Change ownership of Tomcat temp folder
-  file: path=/opt/tomcat/temp owner=tomcat group=tomcat state=directory recurse=yes
+  file: 
+    path: /opt/tomcat/temp 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
   become: yes
 
 - name: Change ownership of Tomcat logs folder
-  file: path=/opt/tomcat/logs owner=tomcat group=tomcat state=directory recurse=yes
+  file: 
+    path: /opt/tomcat/logs 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
   become: yes
 
 - name: Configure Tomcat server
