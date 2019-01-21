@@ -2,5 +2,6 @@
   copy:
     src: "{{ webapp_source_file_path }}"
     dest: "{{ webapp_destination_file_path }}"
-    force: yes 
+    force: yes
+  become: yes
   register: copy_status
