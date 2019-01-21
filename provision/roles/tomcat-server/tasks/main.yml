@@ -1,4 +1,8 @@
 ---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+
 - name: Install Java 1.8
   apt: name=openjdk-8-jdk
   become: true
