@@ -17,7 +17,7 @@
   become_method: sudo
 
 - name: Download Tomcat
-  get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/opt/apache-tomcat-8.5.37.tar.gz
+  get_url: url=https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/tmp/apache-tomcat-8.5.37.tar.gz
   become: yes
 
 - name: Create Tomcat installation directory
@@ -30,7 +30,7 @@
 
 - name: Extract archive
   unarchive: 
-    src: /opt/apache-tomcat-8.5.37.tar.gz
+    src: /tmp/apache-tomcat-8.5.37.tar.gz
     dest: /opt/tomcat
     copy: no
     extra_opts:
