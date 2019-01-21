@@ -87,11 +87,6 @@
     recurse: yes
   become: yes
 
-- name: Configure Tomcat server
-  template: src=server.xml dest=/opt/tomcat/conf/
-  notify: restart tomcat
-  become: yes
-
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
@@ -102,11 +97,7 @@
   become: yes
 
 - name: Reload Daemon
-  systemd:
-    daemon_reload: yes
-    name: tomcat
-    scope: global
-    state: started
+  command: systemctl daemon-reload
   become: yes
 
 - name: Start Tomcat
