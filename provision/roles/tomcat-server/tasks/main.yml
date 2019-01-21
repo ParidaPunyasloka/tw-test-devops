@@ -96,6 +96,7 @@
 
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
+  notify: restart tomcat
   become: yes
 
 
