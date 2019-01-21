@@ -93,7 +93,6 @@
     recurse: yes
   become: yes
 
-
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
@@ -102,6 +101,10 @@
 
 - name: Install Tomcat init script
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
+  become: yes
+
+- name: Install Tomcat init script
+  copy: src=java.security dest=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/security/java.security mode=0755
   become: yes
 
 - name: Reload Daemon
