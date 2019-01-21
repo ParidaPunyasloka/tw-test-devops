@@ -1,115 +1,43 @@
 ---
-- name: include vars
-  include_vars:
-    file: "../vars/secure.yml"
-    
 - name: Install Java 1.8
-  apt: name=openjdk-8-jre state=present
-  become: yes
+  apt: name=openjdk-8-jdk
 
 - name: add group "tomcat"
   group: name=tomcat
-  become: yes
-  
+
 - name: add user "tomcat"
-  user: name=tomcat group=tomcat home=/opt/tomcat createhome=no shell=/bin/false
-  become: yes
+  user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
+  become: True
   become_method: sudo
 
 - name: Download Tomcat
   get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/opt/apache-tomcat-8.5.37.tar.gz
-  become: yes
-
-- name: Create Tomcat installation directory
-  file: 
-    path: /opt/tomcat/
-    state: directory
-    mode: 0755
-  become: yes
- 
 
 - name: Extract archive
-  unarchive: 
-    src: /opt/apache-tomcat-8.5.37.tar.gz
-    dest: /opt/tomcat
-    copy: no
-    extra_opts:
-    - --strip-components=1
-  become: yes
+  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-8.5.37.tar.gz -C /opt/ creates=/opt/apache-tomcat-8.5.37
+
+- name: Symlink install directory
+  file: src=/opt/apache-tomcat-8.5.37 path=/usr/share/tomcat state=link
 
 - name: Change ownership of Tomcat installation
-  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
-  become: yes
+  file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
 
-
-- name: Read Access to contents of conf folder
-  file: 
-    path: /opt/tomcat/conf 
-    owner: tomcat 
-    group: tomcat 
-    state: directory 
-    recurse: yes 
-    mode: "u=rwx,g=rwx,o=rwx"
-  become: yes
-
-
-- name: execute Access to conf folder
-  file: 
-    path: /opt/tomcat/conf 
-    owner: tomcat 
-    group: tomcat 
-    state: directory 
-    recurse: yes 
-    mode: "u=rwx,g=rwx,o=rwx"
-  become: yes
-
-
-- name: Change ownership of Tomcat webapps folder
-  file: 
-    path: /opt/tomcat/webapps 
-    owner: tomcat 
-    group: tomcat 
-    state: directory 
-    recurse: yes
-  become: yes
-
-
-- name: Change ownership of Tomcat temp folder
-  file: 
-    path: /opt/tomcat/temp 
-    owner: tomcat 
-    group: tomcat 
-    state: directory 
-    recurse: yes
-  become: yes
-
-
-- name: Change ownership of Tomcat logs folder
-  file: 
-    path: /opt/tomcat/logs 
-    owner: tomcat 
-    group: tomcat 
-    state: directory 
-    recurse: yes
-  become: yes
-
+- name: Configure Tomcat server
+  template: src=server.xml dest=/usr/share/tomcat/conf/
+  notify: restart tomcat
 
 - name: Configure Tomcat users
-  template: src=tomcat-users.xml dest=/opt/tomcat/conf/
-  become: yes
-
+  template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
+  notify: restart tomcat
 
 - name: Install Tomcat init script
-  copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
-  become: yes
+  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
-- name: Reload Daemon
-  command: systemctl daemon-reload
-  become: yes
+- name: systemd daemon-reload
+  shell: systemctl daemon-reload
 
-- name: Start Tomcat
+- name: tomcat-8-start
   service: name=tomcat state=started enabled=yes
-  become: yes
 
-- name: Run a script with arguments
-  script: /opt/tomcat/bin/startup.sh
+- name: wait for tomcat to start
+  wait_for: port={{http_port}}
