@@ -88,12 +88,12 @@
   become: yes
 
 - name: Configure Tomcat server
-  template: src=server.xml dest=/usr/share/tomcat/conf/
+  template: src=server.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
   become: yes
 
 - name: Configure Tomcat users
-  template: src=tomcat-users.xml dest=/usr/share/tomcat/conf/
+  template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
   become: yes
 
@@ -101,7 +101,7 @@
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
   become: yes
 
-- name: Release Daemon
+- name: Reload Daemon
   command: systemctl daemon-reload
   become: yes
 
