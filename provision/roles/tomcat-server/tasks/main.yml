@@ -105,7 +105,7 @@
   systemd:
     daemon_reload: yes
     name: tomcat
-    scope: all
+    scope: global
     state: started
   become: yes
 
