@@ -102,7 +102,11 @@
   become: yes
 
 - name: Reload Daemon
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
+    name: tomcat
+    scope: all
+    state: started
   become: yes
 
 - name: Start Tomcat
