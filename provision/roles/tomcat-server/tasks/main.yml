@@ -37,6 +37,7 @@
 
 - name: Change ownership of Tomcat installation
   file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+  become: yes
 
 
 - name: Read Access to contents of conf folder
@@ -47,6 +48,7 @@
     state: directory 
     recurse: yes 
     mode: "g=r"
+  become: yes
 
 
 - name: execute Access to conf folder
@@ -57,6 +59,7 @@
     state: directory 
     recurse: yes 
     mode: "g=x"
+  become: yes
 
 
 - name: Change ownership of Tomcat webapps folder
@@ -66,6 +69,7 @@
     group: tomcat 
     state: directory 
     recurse: yes
+  become: yes
 
 
 - name: Change ownership of Tomcat temp folder
@@ -75,6 +79,7 @@
     group: tomcat 
     state: directory 
     recurse: yes
+  become: yes
 
 
 - name: Change ownership of Tomcat logs folder
@@ -84,6 +89,7 @@
     group: tomcat 
     state: directory 
     recurse: yes
+  become: yes
 
 
 - name: Configure Tomcat users
