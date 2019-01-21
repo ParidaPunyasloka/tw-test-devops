@@ -9,8 +9,7 @@
 
 - name: add group "tomcat"
   group: name=tomcat
-  become: yes
-
+  
 - name: add user "tomcat"
   user: name=tomcat group=tomcat home=/opt/tomcat createhome=no shell=/bin/false
   become: yes
@@ -18,14 +17,14 @@
 
 - name: Download Tomcat
   get_url: url=http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/opt/apache-tomcat-8.5.37.tar.gz
-  become: yes
+
 
 - name: Create Tomcat installation directory
   file: 
     path: /opt/tomcat/
     state: directory
     mode: 0755
-  become: yes
+ 
 
 - name: Extract archive
   unarchive: 
@@ -34,11 +33,11 @@
     copy: no
     extra_opts:
     - --strip-components=1
-  become: yes
+
 
 - name: Change ownership of Tomcat installation
   file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
-  become: yes
+
 
 - name: Read Access to contents of conf folder
   file: 
@@ -48,7 +47,7 @@
     state: directory 
     recurse: yes 
     mode: "g=r"
-  become: yes
+
 
 - name: execute Access to conf folder
   file: 
@@ -58,7 +57,7 @@
     state: directory 
     recurse: yes 
     mode: "g=x"
-  become: yes
+
 
 - name: Change ownership of Tomcat webapps folder
   file: 
@@ -67,7 +66,7 @@
     group: tomcat 
     state: directory 
     recurse: yes
-  become: yes
+
 
 - name: Change ownership of Tomcat temp folder
   file: 
@@ -76,7 +75,7 @@
     group: tomcat 
     state: directory 
     recurse: yes
-  become: yes
+
 
 - name: Change ownership of Tomcat logs folder
   file: 
@@ -85,24 +84,24 @@
     group: tomcat 
     state: directory 
     recurse: yes
-  become: yes
+
 
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat
-  become: yes
+
 
 - name: Install Tomcat init script
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
-  become: yes
+
 
 - name: Reload Daemon
   command: systemctl daemon-reload
-  become: yes
+
 
 - name: Start Tomcat
   service: name=tomcat state=started enabled=yes
-  become: yes
+  
 
 - name: wait for tomcat to start
   wait_for: port={{http_port}}
