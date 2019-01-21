@@ -33,7 +33,7 @@
     copy: no
     extra_opts:
     - --strip-components=1
-
+  become: yes
 
 - name: Change ownership of Tomcat installation
   file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
