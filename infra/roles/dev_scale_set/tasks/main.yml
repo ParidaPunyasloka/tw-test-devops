@@ -110,7 +110,7 @@
         key_data: "{{ ssh_keys }}"
     ssh_password_enabled: true
     capacity: 2
-    security_group: "{{ securityGroupName }}"
+    security_group: "{{ vmssName }}"
     virtual_network_name: "{{ vmssName }}"
     subnet_name: "{{ vmssName }}"
     upgrade_policy: Manual
