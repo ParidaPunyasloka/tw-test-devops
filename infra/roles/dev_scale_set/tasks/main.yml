@@ -132,6 +132,6 @@
         disk_size_gb: 30
         managed_disk_type: Standard_LRS
         caching: ReadOnly
-    os_type: linux
+    os_type: Linux
     tags:
       env: "{{ type }}"
