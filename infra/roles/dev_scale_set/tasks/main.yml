@@ -75,7 +75,7 @@
       name: "{{ vmssName }}"
       subnet: "{{ vmssName }}"
       private_ip_allocation_method : Static
-    probe:
+    probes:
       name: "{{ vmssName }}"
       protocol: Tcp
       port: 8080
