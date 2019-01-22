@@ -69,34 +69,35 @@
     location: "{{ location }}"
     resource_group: "{{ resourceGroup }}"
     backend_address_pools:
-      name: "{{ vmssName }}"
+      - name: "{{ vmssName }}"
     frontend_ip_configurations :
-      public_ip_address: "{{ vmssName }}"
-      name: "{{ vmssName }}"
-      subnet: "{{ vmssName }}"
-      private_ip_allocation_method : Static
+      - name: "{{ vmssName }}"
+        subnet: "{{ vmssName }}"
+        private_ip_allocation_method : Static
+        public_ip_address: "{{ vmssName }}"
     probes:
-      name: "{{ vmssName }}"
-      protocol: Tcp
-      port: 8080
-      interval: 10
-      fail_count: 3
-    protocol: Tcp
+      - name: "{{ vmssName }}"
+        protocol: Tcp
+        port: 8080
+        interval: 10
+        fail_count: 3
     load_balancing_rules:
-      load_distribution: Default
-      name: "{{ vmssName }}"
-      frontend_ip_configuration : "{{ vmssName }}"
-      probe: "{{ vmssName }}"
-      backend_address_pool : "{{ vmssName }}"
-      frontend_port: 80    
-      idle_timeout: 4
-      backend_port: 80
+      - name: "{{ vmssName }}"
+        load_distribution: Default      
+        frontend_ip_configuration : "{{ vmssName }}"
+        probe: "{{ vmssName }}"
+        backend_address_pool : "{{ vmssName }}"
+        frontend_port: 80    
+        idle_timeout: 4
+        backend_port: 80
+        protocol: tcp
     inbound_nat_pools:
-      backend_port: 22
-      frontend_port_range_start: 80
-      frontend_port_range_end : 81
-      protocol: Tcp
-      probe: "{{ vmssName }}"
+      - name: "{{ vmssName }}"
+        backend_port: 22
+        frontend_port_range_start: 80
+        frontend_port_range_end : 81
+        protocol: Tcp
+        probe: "{{ vmssName }}"
 
 - name: Create VMSS
   azure_rm_virtualmachine_scaleset:
