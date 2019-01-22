@@ -2,7 +2,7 @@
 - name: include vars
   include_vars:
     file: "../vars/secure.yml"
-    
+
 - name: Create a resource group
   azure_rm_resourcegroup:
     name: "{{ resourceGroup }}"
@@ -99,37 +99,37 @@
       probe: "{{ vmssName }}"
 
 - name: Create VMSS
-    azure_rm_virtualmachine_scaleset:
-      resource_group: "{{ resourceGroup }}"
-      name: "{{ vmssName }}"
-      vm_size: "{{ vmStandardSize }}"
-      admin_username: "{{ admin_username }}"
-      ssh_public_keys: 
-        - path: /home/{{ admin_username }}/.ssh/authorized_keys
-          key_data: "{{ ssh_keys }}"
-      ssh_password_enabled: true
-      capacity: 2
-      security_group: "{{ securityGroupName }}"
-      virtual_network_name: "{{ vmssName }}"
-      subnet_name: "{{ vmssName }}"
-      upgrade_policy: Manual
-      tier: Standard
-      managed_disk_type: Standard_LRS
-      os_disk_caching: ReadWrite
-      image:
-        offer: UbuntuServer
-        publisher: Canonical
-        sku: 18.04-LTS
-        version: latest
-      load_balancer: "{{ vmssLbName }}"
-      data_disks:
-        - lun: 0
-          disk_size_gb: 20
-          managed_disk_type: Standard_LRS
-          caching: ReadOnly
-        - lun: 1
-          disk_size_gb: 30
-          managed_disk_type: Standard_LRS
-          caching: ReadOnly
-      tags:
-        env: "{{ type }}"
+  azure_rm_virtualmachine_scaleset:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    vm_size: "{{ vmStandardSize }}"
+    admin_username: "{{ admin_username }}"
+    ssh_public_keys: 
+      - path: /home/{{ admin_username }}/.ssh/authorized_keys
+        key_data: "{{ ssh_keys }}"
+    ssh_password_enabled: true
+    capacity: 2
+    security_group: "{{ securityGroupName }}"
+    virtual_network_name: "{{ vmssName }}"
+    subnet_name: "{{ vmssName }}"
+    upgrade_policy: Manual
+    tier: Standard
+    managed_disk_type: Standard_LRS
+    os_disk_caching: ReadWrite
+    image:
+      offer: UbuntuServer
+      publisher: Canonical
+      sku: 18.04-LTS
+      version: latest
+    load_balancer: "{{ vmssLbName }}"
+    data_disks:
+      - lun: 0
+        disk_size_gb: 20
+        managed_disk_type: Standard_LRS
+        caching: ReadOnly
+      - lun: 1
+        disk_size_gb: 30
+        managed_disk_type: Standard_LRS
+        caching: ReadOnly
+    tags:
+      env: "{{ type }}"
