@@ -1,1 +1,8 @@
-
+- name: Extract archive
+  unarchive: 
+    src: ~/artifacts/static.zip
+    dest: /var/www/
+    copy: no
+    extra_opts:
+    - --strip-components=1
+  become: yes
