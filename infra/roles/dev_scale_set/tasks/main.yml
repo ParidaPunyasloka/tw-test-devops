@@ -90,7 +90,7 @@
         frontend_port: 80    
         idle_timeout: 4
         backend_port: 80
-        protocol: tcp
+        protocol: Tcp
     inbound_nat_pools:
       - name: "{{ vmssName }}"
         backend_port: 22
