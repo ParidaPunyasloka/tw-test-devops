@@ -96,8 +96,8 @@
         backend_port: 22
         frontend_port_range_start: 80
         frontend_port_range_end : 81
+        frontend_ip_configuration_name: "{{ vmssName }}"
         protocol: Tcp
-        probe: "{{ vmssName }}"
 
 - name: Create VMSS
   azure_rm_virtualmachine_scaleset:
