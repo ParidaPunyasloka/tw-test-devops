@@ -25,6 +25,7 @@
     resource_group: "{{ resourceGroup }}"
     allocation_method: Static
     name: "{{ publicIPName }}"
+    domain_name: "{{ domainName }}"
 
 - name: Create security group that allows SSH, Apache HTTP and Apache HTTPS
   azure_rm_securitygroup:
@@ -69,7 +70,7 @@
     address_prefix: "10.10.0.0/24"
     virtual_network: "{{ virtualNetwork }}"
     security_group: "{{ securityGroupName }}"
-    
+
 - name: Create NIC
   azure_rm_networkinterface:
     resource_group: "{{ resourceGroup }}"

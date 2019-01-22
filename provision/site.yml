@@ -1,12 +1,24 @@
 ---
-- hosts: env_dev_staticApp
+- hosts: env_dev_staticApp_green
   remote_user: tw_test_devops_admin 
   roles:
     - role: httpd
-      tags: ['dev','static']
+      tags: ['dev','static','static_green','green']
 
-- hosts: env_dev_webApp
+- hosts: env_dev_staticApp_blue
+  remote_user: tw_test_devops_admin 
+  roles:
+    - role: httpd
+      tags: ['dev','static','static_blue','blue']
+
+- hosts: env_dev_webApp_green
   remote_user: tw_test_devops_admin
   roles:
     - role: tomcat-server
-      tags: ['dev','web']
+      tags: ['dev','web', 'web_green','green']
+
+- hosts: env_dev_webApp_blue
+  remote_user: tw_test_devops_admin
+  roles:
+    - role: tomcat-server
+      tags: ['dev','web', 'web_blue','blue']
