@@ -21,7 +21,8 @@
     name: "{{ subnetName }}"
     address_prefix: "10.10.0.0/24"
     virtual_network: "{{ virtualNetwork }}"
-
+    security_group: "{{ securityGroupName }}"
+    
 - name: Create public ip
   azure_rm_publicipaddress:
     resource_group: "{{ resourceGroup }}"
