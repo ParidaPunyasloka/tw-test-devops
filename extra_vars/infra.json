@@ -1,5 +1,5 @@
 {
-    "resourceGroup": "dev-tw",
+    "resourceGroup": "dev-tw-blue",
     "location": "eastus",
     "vmssName": "devBlueSS",
     "vmssLbName": "devBlueLB",

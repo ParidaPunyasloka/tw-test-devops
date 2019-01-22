@@ -70,10 +70,9 @@
     resource_group: "{{ resourceGroup }}"
     backend_address_pools:
       - name: "{{ vmssName }}"
-    frontend_ip_configurations :
+    frontend_ip_configurations:
       - name: "{{ vmssName }}"
-        subnet: "{{ vmssName }}"
-        private_ip_allocation_method : Static
+        private_ip_allocation_method: Static
         public_ip_address: "{{ vmssName }}"
     probes:
       - name: "{{ vmssName }}"
@@ -84,7 +83,7 @@
     load_balancing_rules:
       - name: "{{ vmssName }}"
         load_distribution: Default      
-        frontend_ip_configuration : "{{ vmssName }}"
+        frontend_ip_configuration: "{{ vmssName }}"
         probe: "{{ vmssName }}"
         backend_address_pool : "{{ vmssName }}"
         frontend_port: 80    
