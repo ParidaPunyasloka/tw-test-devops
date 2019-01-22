@@ -1,0 +1,135 @@
+---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+    
+- name: Create a resource group
+  azure_rm_resourcegroup:
+    name: "{{ resourceGroup }}"
+    location: "{{ location }}"
+
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    address_prefixes: "10.0.0.0/16"
+
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    address_prefix: "10.0.1.0/24"
+    virtual_network: "{{ vmssName }}"
+
+- name: Create public IP address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resourceGroup }}"
+    allocation_method: Static
+    name: "{{ vmssName }}"
+
+- name: Create Network Security Group that allows SSH
+  azure_rm_securitygroup:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 101
+        direction: Inbound
+      - name: tomcat_HTTP
+        protocol: Tcp
+        destination_port_range: 8085
+        access: Allow
+        priority: 102
+        direction: Inbound
+      - name: tomcat_HTTPS
+        protocol: Tcp
+        destination_port_range: 8443
+        access: Allow
+        priority: 103
+        direction: Inbound
+      - name: HTTP
+        protocol: Tcp
+        destination_port_range: 80
+        access: Allow
+        priority: 104
+        direction: Inbound
+      - name: HTTPS
+        protocol: Tcp
+        destination_port_range: 443
+        access: Allow
+        priority: 105
+        direction: Inbound
+
+- name: Create a load balancer
+  azure_rm_loadbalancer:
+    name: "{{ vmssLbName }}"
+    location: "{{ location }}"
+    resource_group: "{{ resourceGroup }}"
+    backend_address_pools:
+      name: "{{ vmssName }}"
+    frontend_ip_configurations :
+      public_ip_address: "{{ vmssName }}"
+      name: "{{ vmssName }}"
+      subnet: "{{ vmssName }}"
+      private_ip_allocation_method : Static
+    probe:
+      name: "{{ vmssName }}"
+      protocol: Tcp
+      port: 8080
+      interval: 10
+      fail_count: 3
+    protocol: Tcp
+    load_balancing_rules:
+      load_distribution: Default
+      name: "{{ vmssName }}"
+      frontend_ip_configuration : "{{ vmssName }}"
+      probe: "{{ vmssName }}"
+      backend_address_pool : "{{ vmssName }}"
+      frontend_port: 80    
+      idle_timeout: 4
+      backend_port: 80
+    inbound_nat_pools:
+      backend_port: 22
+      frontend_port_range_start: 80
+      frontend_port_range_end : 81
+      protocol: Tcp
+      probe: "{{ vmssName }}"
+
+- name: Create VMSS
+    azure_rm_virtualmachine_scaleset:
+      resource_group: "{{ resourceGroup }}"
+      name: "{{ vmssName }}"
+      vm_size: "{{ vmStandardSize }}"
+      admin_username: "{{ admin_username }}"
+      ssh_public_keys: 
+        - path: /home/{{ admin_username }}/.ssh/authorized_keys
+          key_data: "{{ ssh_keys }}"
+      ssh_password_enabled: true
+      capacity: 2
+      security_group: "{{ securityGroupName }}"
+      virtual_network_name: "{{ vmssName }}"
+      subnet_name: "{{ vmssName }}"
+      upgrade_policy: Manual
+      tier: Standard
+      managed_disk_type: Standard_LRS
+      os_disk_caching: ReadWrite
+      image:
+        offer: UbuntuServer
+        publisher: Canonical
+        sku: 18.04-LTS
+        version: latest
+      load_balancer: "{{ vmssLbName }}"
+      data_disks:
+        - lun: 0
+          disk_size_gb: 20
+          managed_disk_type: Standard_LRS
+          caching: ReadOnly
+        - lun: 1
+          disk_size_gb: 30
+          managed_disk_type: Standard_LRS
+          caching: ReadOnly
+      tags:
+        env: "{{ type }}"

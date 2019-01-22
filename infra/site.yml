@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   roles:
-    - role: dev_static
-      tags: ['dev','static']
-    - role: dev_web
-      tags: ['dev','web']
+    - role: dev_vm
+      tags: ['dev','dev_vm', 'vm']
+    - role: dev_scale_set
+      tags: ['dev','dev_scale_set','scale_set']
   
