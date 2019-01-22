@@ -95,7 +95,7 @@
       - name: "{{ vmssName }}"
         backend_port: 22
         frontend_port_range_start: 80
-        frontend_port_range_end : 84
+        frontend_port_range_end : 90
         frontend_ip_configuration_name: "{{ vmssName }}"
         protocol: Tcp
 
@@ -132,5 +132,6 @@
         disk_size_gb: 30
         managed_disk_type: Standard_LRS
         caching: ReadOnly
+    os_type: linux
     tags:
       env: "{{ type }}"
