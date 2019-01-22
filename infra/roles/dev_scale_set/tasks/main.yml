@@ -108,7 +108,7 @@
     ssh_public_keys: 
       - path: /home/{{ admin_username }}/.ssh/authorized_keys
         key_data: "{{ ssh_keys }}"
-    ssh_password_enabled: true
+    ssh_password_enabled: false
     capacity: 2
     security_group: "{{ vmssName }}"
     virtual_network_name: "{{ vmssName }}"
