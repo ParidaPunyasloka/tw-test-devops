@@ -14,13 +14,6 @@
     name: "{{ vmssName }}"
     address_prefixes: "10.0.0.0/16"
 
-- name: Add subnet
-  azure_rm_subnet:
-    resource_group: "{{ resourceGroup }}"
-    name: "{{ vmssName }}"
-    address_prefix: "10.0.1.0/24"
-    virtual_network: "{{ vmssName }}"
-
 - name: Create public IP address
   azure_rm_publicipaddress:
     resource_group: "{{ resourceGroup }}"
@@ -63,6 +56,14 @@
         priority: 105
         direction: Inbound
 
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    address_prefix: "10.0.1.0/24"
+    virtual_network: "{{ vmssName }}"
+    security_group: "{{ vmssName }}"
+
 - name: Create a load balancer
   azure_rm_loadbalancer:
     name: "{{ vmssLbName }}"
@@ -72,7 +73,7 @@
       - name: "{{ vmssName }}"
     frontend_ip_configurations:
       - name: "{{ vmssName }}"
-        private_ip_allocation_method: Static
+        private_ip_allocation_method: Dynamic
         public_ip_address: "{{ vmssName }}"
     probes:
       - name: "{{ vmssName }}"

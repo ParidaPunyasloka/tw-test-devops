@@ -20,14 +20,6 @@
     name: "{{ virtualNetwork }}"
     address_prefixes: "10.10.0.0/16"
 
-- name: Add subnet
-  azure_rm_subnet:
-    resource_group: "{{ resourceGroup }}"
-    name: "{{ subnetName }}"
-    address_prefix: "10.10.0.0/24"
-    virtual_network: "{{ virtualNetwork }}"
-    security_group: "{{ securityGroupName }}"
-
 - name: Create public ip
   azure_rm_publicipaddress:
     resource_group: "{{ resourceGroup }}"
@@ -69,6 +61,15 @@
         access: Allow
         priority: 105
         direction: Inbound
+
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ subnetName }}"
+    address_prefix: "10.10.0.0/24"
+    virtual_network: "{{ virtualNetwork }}"
+    security_group: "{{ securityGroupName }}"
+    
 - name: Create NIC
   azure_rm_networkinterface:
     resource_group: "{{ resourceGroup }}"
