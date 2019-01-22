@@ -1,6 +1,6 @@
 {
     "resourceGroup": "dev-tw-green",
-    "location": "eastus",
+    "location": "centralus",
     "vmssName": "devgreenSS",
     "vmssLbName": "devgreenLB",
     "vmStandardSize": "Standard_B1s",
