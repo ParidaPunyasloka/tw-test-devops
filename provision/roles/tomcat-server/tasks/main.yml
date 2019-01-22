@@ -98,6 +98,10 @@
   notify: restart tomcat
   become: yes
 
+- name: Install Tomcat server configurations
+  template: src=server.xml dest=/opt/tomcat/conf/
+  notify: restart tomcat
+  become: yes
 
 - name: Install Tomcat init script
   copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
