@@ -94,8 +94,8 @@
     inbound_nat_pools:
       - name: "{{ vmssName }}"
         backend_port: 22
-        frontend_port_range_start: 80
-        frontend_port_range_end : 90
+        frontend_port_range_start: 50000
+        frontend_port_range_end : 50040
         frontend_ip_configuration_name: "{{ vmssName }}"
         protocol: Tcp
 
