@@ -30,32 +30,32 @@
         protocol: Tcp
         destination_port_range: 22
         access: Allow
-        priority: 101
+        priority: 1001
         direction: Inbound
-      - name: tomcat_HTTP
-        protocol: Tcp
-        destination_port_range: 8085
-        access: Allow
-        priority: 102
-        direction: Inbound
-      - name: tomcat_HTTPS
-        protocol: Tcp
-        destination_port_range: 8443
-        access: Allow
-        priority: 103
-        direction: Inbound
-      - name: HTTP
-        protocol: Tcp
-        destination_port_range: 80
-        access: Allow
-        priority: 104
-        direction: Inbound
-      - name: HTTPS
-        protocol: Tcp
-        destination_port_range: 443
-        access: Allow
-        priority: 105
-        direction: Inbound
+#      - name: tomcat_HTTP
+#        protocol: Tcp
+#        destination_port_range: 8085
+#        access: Allow
+#        priority: 102
+#        direction: Inbound
+#      - name: tomcat_HTTPS
+#        protocol: Tcp
+#        destination_port_range: 8443
+#        access: Allow
+#        priority: 103
+#        direction: Inbound
+#      - name: HTTP
+#        protocol: Tcp
+#        destination_port_range: 80
+#        access: Allow
+#        priority: 104
+#        direction: Inbound
+#      - name: HTTPS
+#        protocol: Tcp
+#        destination_port_range: 443
+#        access: Allow
+#       priority: 105
+#        direction: Inbound
 
 - name: Add subnet
   azure_rm_subnet:
@@ -90,7 +90,7 @@
         backend_address_pool : "{{ vmssName }}"
         frontend_port: 80    
         idle_timeout: 4
-        backend_port: 80
+        backend_port: 8080
         protocol: Tcp
         enable_floating_ip: yes
     inbound_nat_pools:
