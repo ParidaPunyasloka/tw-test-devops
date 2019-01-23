@@ -49,4 +49,4 @@
   remote_user: tw_test_devops_admin
   roles:
     - role: tomcat-server
-      tags: ['dev','static_web']
+      tags: ['dev','web_scale']
