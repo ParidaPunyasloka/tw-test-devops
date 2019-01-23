@@ -12,7 +12,7 @@
     "networkInferace": "devtwnic001",
     "VMName": "devWebApp01",
     "ipconfigurationName": "ip_config_dev_web",
-    "type": "dev_webApp_blue",
+    "type": "dev_webApp",
     "domainName": "devwebblue"
     
 }
