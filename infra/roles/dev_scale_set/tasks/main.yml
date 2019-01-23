@@ -92,7 +92,6 @@
         idle_timeout: 4
         backend_port: 8080
         protocol: Tcp
-        enable_floating_ip: yes
     inbound_nat_pools:
       - name: "{{ vmssName }}"
         backend_port: 22

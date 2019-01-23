@@ -80,7 +80,7 @@
     ip_configurations:
       - name: "{{ ipconfigurationName }}"
         public_ip_address_name: "{{ publicIPName }}"
-        public_ip_allocation_method: Dynamic
+        public_ip_allocation_method: Static
         primary: yes
     security_group: "{{ securityGroupName }}"
 
