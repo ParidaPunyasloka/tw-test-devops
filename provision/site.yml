@@ -1,18 +1,16 @@
 ---
-- hosts: all
+- hosts: localhost
   tasks:
   - name: Get facts for all Public IPs within a resource groups
     azure_rm_publicipaddress_facts:
       resource_group: "{{ vmssLbName }}"
     register: output_ip_address
-    delegate_to: localhost
 
   - name: Get loadbalancer info
     azure_rm_loadbalancer_facts:
       resource_group: "{{ resourceGroup }}"
       name: "devBlueLB"
     register: output
-    delegate_to: localhost
 
   - name: Add all hosts
     add_host:
@@ -24,8 +22,7 @@
       ansible_ssh_public_keys: "{{ ssh_keys }}"
     with_items:
       - "{{ output.ansible_facts.azure_loadbalancers[0].properties.inboundNatRules }}"
-    delegate_to: localhost
-    
+      
 - hosts: env_dev_staticApp
   remote_user: tw_test_devops_admin 
   roles:
