@@ -1,6 +1,6 @@
 {
     "resourceGroup": "dev-tw-blue",
-    "location": "eastus",
+    "location": "westus",
     "vmssName": "devBlueSS",
     "vmssLbName": "devBlueLB",
     "vmStandardSize": "Standard_B1s",
