@@ -26,7 +26,7 @@
       - "{{ output.ansible_facts.azure_loadbalancers[0].properties.inboundNatRules }}"
     tags:
          - scale_set_inv
-         
+
 - hosts: env_dev_staticApp
   remote_user: tw_test_devops_admin 
   roles:
