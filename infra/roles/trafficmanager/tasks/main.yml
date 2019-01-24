@@ -30,11 +30,8 @@
     tags:
       Environment: Dev
 
+- name: Azure login
+  command: az login --service-principal -u {{ AZURE_CLIENT_ID }} -p {{ AZURE_SECRET }} --tenant {{ AZURE_TENANT }}
+
 - name: create a endpoint for a traffic manager profile
-  azure_rm_trafficmanagerendpoint:
-      resource_group: "{{ tf_resourceGroup }}"
-      profile_name: "{{ tf_name }}"
-      name: "{{ tf_endPointName }}"
-      type: azure_endpoints
-      weight: "{{ tf_weight }}"
-      target_resource_id: "{{ public_ip_address_facts.ansible_facts.azure_publicipaddresses[0].id }}"
+  command: az network traffic-manager endpoint create --name {{ tf_endPointName }} --profile-name {{ tf_name }} --resource-group {{ tf_resourceGroup }} --type azureEndpoints  --target-resource-id {{ public_ip_address_facts.ansible_facts.azure_publicipaddresses[0].id }} --weight {{ tf_weight }}
