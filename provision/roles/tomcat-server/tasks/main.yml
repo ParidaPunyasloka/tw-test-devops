@@ -93,6 +93,10 @@
     recurse: yes
   become: yes
 
+- name: Create Key for Self-Signed certificates
+  command: /usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/keytool -genkey -alias tomcat -keyalg RSA -keystore /opt/tomcat/.keystore
+  register: keytool_key
+
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
   notify: restart tomcat

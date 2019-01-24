@@ -106,7 +106,11 @@
         </SSLHostConfig>
     </Connector>
     -->
-
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+               keystoreFile="${catalina.base}/.keystore" keystorePass="Bmcmyit1"
+               clientAuth="false" sslProtocol="TLS"
+			   sslEnabledProtocols="TLSv1.2,TLSv1.1,SSLv2Hello"/>
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
 
