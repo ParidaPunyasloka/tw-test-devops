@@ -7,7 +7,7 @@
   azure_rm_publicipaddress_facts:
     resource_group: "{{ resourceGroup }}"
     name: "{{ vmssName }}"
-  register: public_ip_adress_facts
+  register: public_ip_address_facts
 
 - name: Create a resource group
   azure_rm_resourcegroup:
@@ -37,4 +37,4 @@
       name: "{{ tf_endPointName }}"
       type: azure_endpoints
       weight: "{{ tf_weight }}"
-      target_resource_id: "{{ public_ip_adress_facts.publicIPAddresses[0].id }}"
+      target_resource_id: "{{ public_ip_address_facts.ansible_facts.azure_publicipaddresses[0].id }}"
