@@ -19,17 +19,18 @@ def provisionTypeSelection(x):
     '2': individualVMprovision()
 }[x]
 def vmScaleSet():
-    subprocess.call(["ansible-playbook", "infra/site.yml", "--vault-id", "ansible-vault-pass", "--extra-vars", '"@extra_vars/infra.blue.json"', "--tags", '"dev_scale_set"'])
-     
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set"'
+    subprocess.call(cmd, shell=True)
 def individualVM():
-    subprocess.call(["ansible-playbook", "infra/site.yml", "--vault-id", "ansible-vault-pass", "--extra-vars", '"@extra_vars/infra.blue.json"', "--tags", '"dev_vm"'])
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "dev_vm"'
+    subprocess.call(cmd, shell=True)
 def infraTypeSelection(x):
     return {
     '1': vmScaleSet(),
     '2': individualVM()
 }[x]
 def infraCreation():
-    infraType = input("What Kind of VM do you want to create ?\n1)VM Scale Set\n2)Individual VM")
+    infraType = input("What Kind of VM do you want to create ?\n1)VM Scale Set\n2)Individual VM\n\nType an option (1 or 2) and hit ENTER: ")
     if infraType:
         infraChoiceSelected = infraTypeSelection(infraType)
 def provisioning():

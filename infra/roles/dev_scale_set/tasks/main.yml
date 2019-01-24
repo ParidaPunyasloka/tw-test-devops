@@ -4,7 +4,7 @@
     file: "../vars/secure.yml"
 
 - include_role:
-    name: loadblancer
+    name: loadbalancer
 
 - name: Create VMSS
   azure_rm_virtualmachine_scaleset:
