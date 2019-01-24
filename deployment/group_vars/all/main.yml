@@ -1,0 +1,17 @@
+resourceGroup: dev-tw
+location: eastus
+# Mandatory for Scale Set Deployment. Optional For single VM
+vmssName: devBlueSS  
+# Mandatory for Scale Set Deployment. Optional For single VM
+vmssLbName: devBlueLB
+vmStandardSize: Standard_B1s
+storageAccountName: devtwstorageaccount001
+virtualNetwork: devtwvn001
+subnetName: devtwsubnet001
+publicIPName: devtwpublicip001
+securityGroupName: devtwsecgroup001
+networkInferace: devtwnic001
+VMName: devWebApp01
+ipconfigurationName: ip_config_dev_web
+type: dev_webApp_blue
+domainName: devwebblue
