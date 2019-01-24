@@ -26,7 +26,7 @@
 
 - name: create a endpoint for a traffic manager profile
   azure_rm_trafficmanagerendpoint:
-      resource_group: "{{ resourceGroup }}"
+      resource_group: "{{ tf_resourceGroup }}"
       profile_name: "{{ tf_name }}"
       name: "{{ tf_endPointName }}"
       type: azure_endpoints
