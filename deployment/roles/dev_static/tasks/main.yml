@@ -1,6 +1,13 @@
+- name: Copy the Zip file
+  copy:
+    src: "{{ webapp_source_file_path }}"
+    dest: "{{ webapp_destination_file_path }}"
+    force: yes
+  become: yes
+  register: copy_status
 - name: Extract archive
   unarchive: 
-    src: ~/artifacts/static.zip
+    src: /var/www/static.zip
     dest: /var/www/
     copy: no
     extra_opts:
