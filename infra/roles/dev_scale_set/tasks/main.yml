@@ -40,3 +40,6 @@
     os_type: Linux
     tags:
       env: "{{ type }}"
+
+- include_role:
+    name: trafficmanager
