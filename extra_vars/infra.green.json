@@ -18,7 +18,6 @@
     "tf_name": "blue-green",
     "tf_dns_name": "blue-green-tw",
     "tf_endPointName": "green-endpoint",
-    "tf_weight": "10",
-    "tf_location": "northcentralus"
+    "tf_weight": "10"
     
 }

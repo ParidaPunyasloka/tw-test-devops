@@ -12,7 +12,6 @@
   azure_rm_trafficmanagerprofile:
     name: "{{ tf_name }}"
     resource_group: "{{ tf_resourceGroup }}"
-    location: "{{ tf_location }}"
     profile_status: enabled
     routing_method: weighted
     dns_config:
