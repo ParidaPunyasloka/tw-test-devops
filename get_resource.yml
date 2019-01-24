@@ -1,0 +1,23 @@
+- hosts: localhost
+  tasks:
+  - name: Get facts for all Public IPs within a resource groups
+    azure_rm_publicipaddress_facts:
+      resource_group: "dev-tw-blue"
+    register: output_ip_address
+
+  - name: Get loadbalancer info
+    azure_rm_loadbalancer_facts:
+      resource_group: "dev-tw-blue"
+      name: "devBlueLB"
+    register: output
+
+  - name: Add all hosts
+    add_host:
+      groups: scalesethosts
+      hostname: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}_{{ item.properties.frontendPort }}"
+      ansible_host: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+      ansible_port: "{{ item.properties.frontendPort }}"
+      ansible_admin_username: "tw_test_devops_admin"
+      ansible_ssh_public_keys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD0ly7X8Qb8SdSPhpM0lsqqyXhYP0RKi+KpKkpsvIp0P5GxBFqDL8m9IUaFSLX85xVjM1y9thBRwG+jgC4XG0D1yryFZK6t3c1k6RirFw4KWiIWu7lDxN0XfT1gxOh5Ln2kbYXcSgSt77Q7aTJQpE+o+BI/zGKJH7iEjQeu3YoFT0suo7Ath7fCDBtNGIKxDmSRHl+ujx9dvzE3/nEuYMFNFrD8Nvvnu2R8DqJ0Pe1NTJG3VjqvBwBurTS9HIRojF9GUNb0Vlh3X5q8TgqLPA932Wit17mXfdwrtkrBgMzu8yW9K2V//YHQdGnNhEQxPun0SHDR9xxUVmQwFKEHxA7a4twtvw6Zw39pC0yVVSGs8OxY949/RvsnnhGMCWBtQRGsW9Y8kMIoghBMytj6zWvTZrcyLEeulGm/UDHifdmaqpKs+/SDSqbXWEoeWZrC2ynslXAW74Ea1Ouq1I2vBmYzaGOjlwuF2qa0p+TGSWX71nEB8+hg2OBnfR8LjW1ojACZCrrC6zwqEKKKqFcxGmE2dAVkv+kUxuq5bNR/v20oGAIZyAqVjxQsSxBfdvmnBcBqfZRjl6HLOrSQBQSdfoPEk/tpYVj5O/GfKOHYu/1xgttIwYeBo1wktzopfw4C09KNIPAMSjDgzK1XTAgt3pSKLugHJ72kWN6mq+EFzP7hKQ== tw_test"
+    with_items:
+      - "{{ output.ansible_facts.azure_loadbalancers[0].properties.inboundNatRules }}"

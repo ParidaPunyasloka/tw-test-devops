@@ -1,0 +1,37 @@
+---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+
+- name: Get facts for one Public IP
+  azure_rm_publicipaddress_facts:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+  register: public_ip_address_facts
+
+- name: Create a resource group
+  azure_rm_resourcegroup:
+    name: "{{ tf_resourceGroup }}"
+    location: "{{ tf_location }}"
+
+- name: Create Traffic Manager
+  azure_rm_trafficmanagerprofile:
+    name: "{{ tf_name }}"
+    resource_group: "{{ tf_resourceGroup }}"
+    profile_status: enabled
+    routing_method: weighted
+    dns_config:
+      relative_name: "{{ tf_dns_name }}"
+      ttl: 60
+    monitor_config:
+      protocol: HTTP
+      port: 80
+      path: '/'
+    tags:
+      Environment: Dev
+
+- name: Azure login
+  command: az login --service-principal -u {{ AZURE_CLIENT_ID }} -p {{ AZURE_SECRET }} --tenant {{ AZURE_TENANT }}
+
+- name: create a endpoint for a traffic manager profile
+  command: az network traffic-manager endpoint create --name {{ tf_endPointName }} --profile-name {{ tf_name }} --resource-group {{ tf_resourceGroup }} --type azureEndpoints  --target-resource-id {{ public_ip_address_facts.ansible_facts.azure_publicipaddresses[0].id }} --weight {{ tf_weight }}

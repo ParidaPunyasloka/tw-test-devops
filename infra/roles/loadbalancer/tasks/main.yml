@@ -1,0 +1,98 @@
+---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+
+- name: Create a resource group
+  azure_rm_resourcegroup:
+    name: "{{ resourceGroup }}"
+    location: "{{ location }}"
+
+- name: Create virtual network
+  azure_rm_virtualnetwork:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    address_prefixes: "10.0.0.0/16"
+
+- name: Create public IP address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resourceGroup }}"
+    allocation_method: Static
+    name: "{{ vmssName }}"
+    domain_name: "{{ domainName }}"
+
+- name: Create Network Security Group that allows SSH
+  azure_rm_securitygroup:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 1001
+        direction: Inbound
+      - name: tomcat_HTTP
+        protocol: Tcp
+        destination_port_range: 8080
+        access: Allow
+        priority: 1002
+        direction: Inbound
+      - name: tomcat_HTTPS
+        protocol: Tcp
+        destination_port_range: 8443
+        access: Allow
+        priority: 1003
+        direction: Inbound
+
+- name: Add subnet
+  azure_rm_subnet:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+    address_prefix: "10.0.1.0/24"
+    virtual_network: "{{ vmssName }}"
+    security_group: "{{ vmssName }}"
+
+- name: Create a load balancer
+  azure_rm_loadbalancer:
+    name: "{{ vmssLbName }}"
+    location: "{{ location }}"
+    resource_group: "{{ resourceGroup }}"
+    backend_address_pools:
+      - name: "{{ vmssName }}"
+    frontend_ip_configurations:
+      - name: "{{ vmssName }}"
+        private_ip_allocation_method: Dynamic
+        public_ip_address: "{{ vmssName }}"
+    probes:
+      - name: "{{ vmssName }}"
+        protocol: Tcp
+        port: 8080
+        interval: 10
+        fail_count: 3
+    load_balancing_rules:
+      - name: "{{ vmssName }}"
+        load_distribution: Default      
+        frontend_ip_configuration: "{{ vmssName }}"
+        probe: "{{ vmssName }}"
+        backend_address_pool : "{{ vmssName }}"
+        frontend_port: 80    
+        idle_timeout: 4
+        backend_port: 8080
+        protocol: Tcp
+      - name: "{{ vmssName }}_2"
+        load_distribution: Default      
+        frontend_ip_configuration: "{{ vmssName }}"
+        probe: "{{ vmssName }}"
+        backend_address_pool : "{{ vmssName }}"
+        frontend_port: 443   
+        idle_timeout: 4
+        backend_port: 8443
+        protocol: Tcp
+    inbound_nat_pools:
+      - name: "{{ vmssName }}"
+        backend_port: 22
+        frontend_port_range_start: 50000
+        frontend_port_range_end : 50040
+        frontend_ip_configuration_name: "{{ vmssName }}"
+        protocol: Tcp

@@ -1,0 +1,129 @@
+---
+- name: include vars
+  include_vars:
+    file: "../vars/secure.yml"
+    
+- name: Install Java 1.8
+  apt: name=openjdk-8-jdk state=present
+  become: yes
+
+- name: add group "tomcat"
+  group: name=tomcat
+  become: yes
+  
+- name: add user "tomcat"
+  user: name=tomcat group=tomcat home=/opt/tomcat createhome=no shell=/bin/false
+  become: yes
+  become_method: sudo
+
+- name: Download Tomcat
+  get_url: url=https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz dest=/tmp/apache-tomcat-8.5.37.tar.gz
+  become: yes
+
+- name: Create Tomcat installation directory
+  file: 
+    path: /opt/tomcat/
+    state: directory
+    mode: 0755
+  become: yes
+ 
+
+- name: Extract archive
+  unarchive: 
+    src: /tmp/apache-tomcat-8.5.37.tar.gz
+    dest: /opt/tomcat
+    copy: no
+    extra_opts:
+    - --strip-components=1
+  become: yes
+
+- name: Change ownership of Tomcat installation
+  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+  become: yes
+
+
+- name: Read Access to contents of conf folder
+  file: 
+    path: /opt/tomcat/conf 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes 
+    mode: "u=rwx,g=rwx,o=rwx"
+  become: yes
+
+
+- name: execute Access to conf folder
+  file: 
+    path: /opt/tomcat/conf 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes 
+    mode: "u=rwx,g=rwx,o=rwx"
+  become: yes
+
+
+- name: Change ownership of Tomcat webapps folder
+  file: 
+    path: /opt/tomcat/webapps 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
+  become: yes
+
+
+- name: Change ownership of Tomcat temp folder
+  file: 
+    path: /opt/tomcat/temp 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
+  become: yes
+
+
+- name: Change ownership of Tomcat logs folder
+  file: 
+    path: /opt/tomcat/logs 
+    owner: tomcat 
+    group: tomcat 
+    state: directory 
+    recurse: yes
+  become: yes
+
+- name: Create Key for Self-Signed certificates
+  command: /usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/keytool -genkey -keystore /opt/tomcat/.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias app -dname "cn=Unknown, ou=Unknown, o=Unknown, c=Unknown" -storepass {{ admin_password }} -keypass {{ admin_password }}
+  register: keytool_key
+  become: yes
+
+- name: Configure Tomcat users
+  template: src=tomcat-users.xml dest=/opt/tomcat/conf/
+  notify: restart tomcat
+  become: yes
+
+- name: Install Tomcat server configurations
+  template: src=server.xml dest=/opt/tomcat/conf/
+  notify: restart tomcat
+  become: yes
+
+- name: Install Tomcat init script
+  copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service mode=0755
+  become: yes
+
+- name: Install Tomcat Environment Variables
+  copy: src=tomcat.envs dest=/etc/default/tomcat mode=0755
+  become: yes
+
+- name: Reload Daemon
+  command: systemctl daemon-reload
+  become: yes
+
+- name: Start Tomcat
+  service: name=tomcat state=started enabled=yes
+  become: yes
+
+- name: wait for tomcat to start
+  wait_for: port={{http_port}}
+  become: yes

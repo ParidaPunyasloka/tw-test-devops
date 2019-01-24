@@ -1,0 +1,52 @@
+---
+- hosts: localhost
+  tasks:   
+  - name: Get facts for all Public IPs within a resource groups
+    azure_rm_publicipaddress_facts:
+      resource_group: "{{ resourceGroup }}"
+    register: output_ip_address
+    tags:
+         - scale_set_inv
+  - name: Get loadbalancer info
+    azure_rm_loadbalancer_facts:
+      resource_group: "{{ resourceGroup }}"
+      name: "{{ vmssLbName }}"
+    register: output
+    tags:
+         - scale_set_inv    
+  - name: Add all hosts
+    add_host:
+      groups: "{{ vmssName }}"
+      hostname: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}_{{ item.properties.frontendPort }}"
+      ansible_host: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+      ansible_port: "{{ item.properties.frontendPort }}"
+      ansible_ssh_user: "{{ admin_username }}"
+      ansible_ssh_pass: "{{ admin_password }}"
+    with_items:
+      - "{{ output.ansible_facts.azure_loadbalancers[0].properties.inboundNatRules }}"
+    tags:
+         - scale_set_inv
+
+- hosts: env_dev_staticApp
+  remote_user: tw_test_devops_admin 
+  roles:
+    - role: dev_static
+      tags: ['dev','static']
+
+- hosts: env_dev_webApp
+  remote_user: tw_test_devops_admin
+  roles:
+    - role: dev_web
+      tags: ['dev','web']
+
+- hosts: "{{ vmssName }}"
+  remote_user: tw_test_devops_admin
+  roles:
+    - role: dev_static
+      tags: ['dev','static_scale']
+
+- hosts: "{{ vmssName }}"
+  remote_user: tw_test_devops_admin
+  roles:
+    - role: dev_web
+      tags: ['dev','web_scale']

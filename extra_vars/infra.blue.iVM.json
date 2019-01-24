@@ -1,0 +1,23 @@
+{
+    "resourceGroup": "dev-tw-blue",
+    "location": "westus",
+    "vmssName": "devBlueSS",
+    "vmssLbName": "devBlueLB",
+    "vmStandardSize": "Standard_B1s",
+    "storageAccountName": "devtwstorageaccountivm1",
+    "virtualNetwork": "devtwvnivm001",
+    "subnetName": "devtwsubnetivm001",
+    "publicIPName": "devtwpublicipivm001",
+    "securityGroupName": "devtwsecgroup001",
+    "networkInferace": "devtwnicivm001",
+    "VMName": "devStaticAppivm01",
+    "ipconfigurationName": "ip_config_dev_webivm",
+    "type": "dev_staticApp",
+    "domainName": "devstaticivmblue",
+    "tf_resourceGroup": "blue-green-tf-rg",
+    "tf_name": "blue-green",
+    "tf_dns_name": "blue-green-tw",
+    "tf_endPointName": "blue-endpoint",
+    "tf_weight": "90"
+    
+}
