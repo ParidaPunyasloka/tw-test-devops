@@ -38,6 +38,12 @@
         access: Allow
         priority: 102
         direction: Inbound
+      - name: tomcat_HTTPS
+        protocol: Tcp
+        destination_port_range: 8443
+        access: Allow
+        priority: 102
+        direction: Inbound
 
 - name: Add subnet
   azure_rm_subnet:
@@ -73,6 +79,15 @@
         frontend_port: 80    
         idle_timeout: 4
         backend_port: 8080
+        protocol: Tcp
+      - name: "{{ vmssName }}_2"
+        load_distribution: Default      
+        frontend_ip_configuration: "{{ vmssName }}"
+        probe: "{{ vmssName }}"
+        backend_address_pool : "{{ vmssName }}"
+        frontend_port: 443   
+        idle_timeout: 4
+        backend_port: 8443
         protocol: Tcp
     inbound_nat_pools:
       - name: "{{ vmssName }}"
