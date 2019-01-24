@@ -16,7 +16,7 @@ Pre-Requisites:
 ### Notes: 
 * A **Self signed certificate** is created through Java **Keytool** using the provisioning step of ApacheTomcat. The certificate is deployed to tomcat and hence making it available via HTTPS.
 * The Deployed site can accessed via https://blue-green-tw.trafficmanager.net/
-* The site can also be accessed via the public IP of the load balancer. 
+* The site can also be accessed via the public IP of the load balancer as well. 
 
 
 The Script **site.py** is a wrapper script to perform all these operations and is self-explainatory. All you need to do is 
