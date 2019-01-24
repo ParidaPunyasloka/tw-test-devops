@@ -13,7 +13,7 @@
   become: yes
 
 - name: Extract archive
-  command: unzip {{ webapp_destination_file_path }} -d {{ webapp_destination_folder }}
+  command: unzip -o {{ webapp_destination_file_path }} -d {{ webapp_destination_folder }}
   # unarchive:
   #  src: "{{ webapp_destination_file_path }}"
   #  dest: "{{ webapp_destination_folder }}"
