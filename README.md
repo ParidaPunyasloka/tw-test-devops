@@ -71,13 +71,13 @@ ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansi
 ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "web"'
 
 ## Deploying the StaticApp to BLUE VM Scale Sets
-ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,static_scale"
+ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,static_scale"
 
 ## Deploying the StaticApp to GREEN VM Scale Sets
 ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,static_scale"
 
 ## Deploying the StaticApp to BLUE VM Scale Sets
-ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,web_scale"
+ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,web_scale"
 
 ## Deploying the WebApp to GREEN VM Scale Sets
 ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"
