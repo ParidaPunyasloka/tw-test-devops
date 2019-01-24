@@ -104,14 +104,14 @@ def CodeDeployment(x):
         exit(0)
 
 def vmScaleSetdeployment():
-    vmScaleSetDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) \n\nType an option (1 or 2) and hit ENTER: ")
+    vmScaleSetDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Static Files) \n\nType an option (1 or 2) and hit ENTER: ")
     if vmScaleSetDeploymentAppType:
         CodeDeployment_vmset(vmScaleSetDeploymentAppType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)   
 def individualVMdeployment():
-    individualVMDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) \n\nType an option (1 or 2) and hit ENTER: ")
+    individualVMDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Static Files) \n\nType an option (1 or 2) and hit ENTER: ")
     if individualVMDeploymentAppType:
         CodeDeployment(individualVMDeploymentAppType)    
     else:

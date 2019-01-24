@@ -5,11 +5,17 @@
     force: yes
   become: yes
   register: copy_status
+
+- name: Check is unzip is present
+  package:
+    name: unzip
+    state: present
+  become: yes
+
 - name: Extract archive
-  unarchive: 
-    src: "{{ webapp_destination_file_path }}"
-    dest: "{{ webapp_destination_folder }}"
-    copy: no
-    extra_opts:
-    - --strip-components=1
+  command: unzip -o {{ webapp_destination_file_path }} -d {{ webapp_destination_folder }}
+  # unarchive:
+  #  src: "{{ webapp_destination_file_path }}"
+  #  dest: "{{ webapp_destination_folder }}"
+  #  remote_src: yes
   become: yes
