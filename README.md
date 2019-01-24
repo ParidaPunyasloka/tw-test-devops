@@ -26,6 +26,15 @@ However, I will walkthrough what the various ansible commands that the script ex
 
 ### CREATING SCALED VMs BEHIND A LOAD BALANCER AND A TRAFFIC MANAGER
 
+This ansible code base uses roles to modularize various deployment functionalities. Also the runtime configurations are stored inside the folder extra_vars. Any confiugration changes required to the Infrastrucure or the deployment needs to made to the files inside the folder before executing the *site.py* script
+
+A brief description of the config files
+**infra.blue.json** Configuration for VM scale sets under the BLUE environment
+**infra.green.json** Configuration for VM scale sets under the GREEN environment
+**infra.blue.iVM.json** Configuration for individual VMs (Those that don't belong to the VM scale set, especially the static app VMs) sets under the BLUE environment
+**infra.green.iVM.json** Configuration for individual VMs (Those that don't belong to the VM scale set, especially the static app VMs) under the GREEN environment
+
+
 ## Creating the Blue Infrastructre for the webApp deployment
 ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set"
 ## Creating the Green Infrastructre for the webApp deployment
