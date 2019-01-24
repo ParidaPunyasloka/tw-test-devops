@@ -14,7 +14,7 @@ Pre-Requisites:
 * The Artifactory is assumed to be a local folder in the Ansible Host machine itself
 
 ### Notes: 
-* A Self signed certificate is created using Java Keytool using the provisioning step of ApacheTomcat. The certificate is deployed to tomcat and hence making it available via HTTPS.
+* A **Self signed certificate** is created through Java **Keytool** using the provisioning step of ApacheTomcat. The certificate is deployed to tomcat and hence making it available via HTTPS.
 * The Deployed site can accessed via https://blue-green-tw.trafficmanager.net/
 * The site can also be accessed via the public IP of the load balancer. 
 
