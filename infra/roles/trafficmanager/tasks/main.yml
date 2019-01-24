@@ -9,7 +9,7 @@
     location: global
 
 - name: Create Traffic Manager
-  azure_rm_trafficmanager:
+  azure_rm_trafficmanagerprofile:
     name: "{{ tf_name }}"
     resource_group: "{{ tf_resourceGroup }}"
     location: global
