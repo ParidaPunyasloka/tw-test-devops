@@ -11,6 +11,20 @@ def webapp_blue():
 def webapp_green():
     cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"'
     subprocess.call(cmd, shell=True) 
+
+def staticapp_blue_iVM():
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "static"'
+    subprocess.call(cmd, shell=True) 
+def staticapp_green_iVM():
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "static"'
+    subprocess.call(cmd, shell=True) 
+def webapp_blue_iVM():
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "web"'
+    subprocess.call(cmd, shell=True)  
+def webapp_green_iVM():
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "web"'
+    subprocess.call(cmd, shell=True) 
+
 def webappDeployment(x):
     if(x==1):
         webapp_blue()
@@ -24,6 +38,22 @@ def staticappDeployment(x):
         staticapp_blue()
     elif(x==2):
         staticapp_green()  
+    else:
+        print('Invalid Option! Exiting')
+        exit(0)
+def webappDeployment_iVM(x):
+    if(x==1):
+        webapp_blue_iVM()
+    elif(x==2):
+        webapp_green_iVM()  
+    else:
+        print('Invalid Option! Exiting')
+        exit(0)
+def staticappDeployment_iVM(x):
+    if(x==1):
+        staticapp_blue_iVM()
+    elif(x==2):
+        staticapp_green_iVM()  
     else:
         print('Invalid Option! Exiting')
         exit(0)
@@ -42,11 +72,20 @@ def staticapp_vmset():
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)
 def webapp():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "web"'
-    subprocess.call(cmd, shell=True) 
+    webappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
+    if webappdeploymentType:
+        webappDeployment_iVM(webappdeploymentType)    
+    else:
+        print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
+        exit(0)
 def staticapp():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "static"'
-    subprocess.call(cmd, shell=True) 
+    staticappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
+    if staticappdeploymentType:
+        staticappDeployment_iVM(staticappdeploymentType)    
+    else:
+        print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
+        exit(0)
+
 def CodeDeployment_vmset(x):
     if(x==1):
         webapp_vmset()
@@ -86,6 +125,8 @@ def deploymentTypeSelection(x):
     else:
         print('Invalid Option! Exiting')
         exit(0)
+
+        
 def httpd_blue():
     cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,static_scale"'
     subprocess.call(cmd, shell=True) 
@@ -97,6 +138,18 @@ def tomcat_blue():
     subprocess.call(cmd, shell=True) 
 def tomcat_green():
     cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"'
+    subprocess.call(cmd, shell=True) 
+def httpd_blue_iVM():
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "static"'
+    subprocess.call(cmd, shell=True)  
+def httpd_green_iVM():
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "static"'
+    subprocess.call(cmd, shell=True) 
+def tomcat_blue_iVM():
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "web"'
+    subprocess.call(cmd, shell=True) 
+def tomcat_green_iVM():
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "web"'
     subprocess.call(cmd, shell=True) 
 def tomcatDeployment(x):
     if(x==1):
@@ -114,6 +167,22 @@ def httpdDeployment(x):
     else:
         print('Invalid Option! Exiting')
         exit(0)
+def tomcatDeployment_iVM(x):
+    if(x==1):
+        tomcat_blue_iVM()
+    elif(x==2):
+        tomcat_green_iVM()  
+    else:
+        print('Invalid Option! Exiting')
+        exit(0)
+def httpdDeployment_iVM(x):
+    if(x==1):
+        httpd_blue_iVM()
+    elif(x==2):
+        httpd_green_iVM()  
+    else:
+        print('Invalid Option! Exiting')
+        exit(0)
 def tomcat_vmset():
     tomcatdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if tomcatdeploymentType:
@@ -128,12 +197,22 @@ def httpd_vmset():
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)
+
 def tomcat():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "web"'
-    subprocess.call(cmd, shell=True) 
+    tomcatdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
+    if tomcatdeploymentType:
+        tomcatDeployment_iVM(tomcatdeploymentType)    
+    else:
+        print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
+        exit(0)
+
 def httpd():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "static"'
-    subprocess.call(cmd, shell=True) 
+    httpddeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
+    if httpddeploymentType:
+        httpdDeployment_iVM(httpddeploymentType)    
+    else:
+        print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
+        exit(0)
 def ApplicationInstallation_vmset(x):
     if(x==1):
         tomcat_vmset()
@@ -172,6 +251,8 @@ def provisionTypeSelection(x):
     else:
         print('Invalid Option! Exiting')
         exit(0)
+
+
 def blueInfra():
     cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set"'
     subprocess.call(cmd, shell=True)
@@ -192,10 +273,30 @@ def vmScaleSet():
         blueGreenSelection(blueGreenType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
-        exit(0)        
-def individualVM():
-    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "dev_vm"'
+        exit(0)    
+
+        
+def blueInfraIndividualVM():
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_vm"'
     subprocess.call(cmd, shell=True)
+def greenInfraIndividualVM():
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "dev_vm"'
+    subprocess.call(cmd, shell=True)
+def blueGreenSelectionIndividualVM(x):
+    if(x==1):
+        blueInfraIndividualVM()
+    elif(x==2):
+        greenInfraIndividualVM()  
+    else:
+        print('Invalid Option! Exiting')
+        exit(0)
+def individualVM():
+    blueGreenType = input("\nWhich group do you want your Infra to be part of ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
+    if blueGreenType:
+        blueGreenSelectionIndividualVM(blueGreenType)    
+    else:
+        print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
+        exit(0)  
 def infraTypeSelection(x):
     if(x==1):
         vmScaleSet()
