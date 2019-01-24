@@ -1,0 +1,489 @@
+ansible-playbook 2.7.6
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/home/ansible-host/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/ansible-host/.local/lib/python2.7/site-packages/ansible
+  executable location = /home/ansible-host/.local/bin/ansible-playbook
+  python version = 2.7.15rc1 (default, Nov 12 2018, 14:31:15) [GCC 7.3.0]
+Using /etc/ansible/ansible.cfg as config file
+setting up inventory plugins
+/etc/ansible/hosts did not meet host_list requirements, check plugin documentation if this is unexpected
+/etc/ansible/hosts did not meet script requirements, check plugin documentation if this is unexpected
+Parsed /etc/ansible/hosts inventory source with ini plugin
+Loading callback plugin default of type stdout, v2.0 from /home/ansible-host/.local/lib/python2.7/site-packages/ansible/plugins/callback/default.pyc
+
+PLAYBOOK: test.yml *****************************************************************************************************************************************************
+1 plays in test.yml
+
+PLAY [localhost] *******************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************
+task path: /home/ansible-host/tw-test-devops/test.yml:1
+<127.0.0.1> ESTABLISH LOCAL CONNECTION FOR USER: ansible-host
+<127.0.0.1> EXEC /bin/sh -c 'echo ~ansible-host && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502 `" && echo ansible-tmp-1548338379.96-8982315166502="` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502 `" ) && sleep 0'
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/basic.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/namespace.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/ansible_collector.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/default_collectors.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/convert_bool.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/_collections_compat.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/six/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/_text.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/pycompat24.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/process.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/file.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/compat.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/timeout.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/collector.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/freebsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/openbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/base.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/dragonfly.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/dragonfly.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/aix.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/aix.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/linux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/platform.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/hpux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/cmdline.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/user.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/hurd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/other/facter.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/hpux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/distribution.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/freebsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/openbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/darwin.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/iscsi.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/linux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/sunos.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/sunos.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/chroot.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/apparmor.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/openbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/local.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/other/ohai.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/other/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/service_mgr.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/hurd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/hpux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/fips.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/selinux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/pkg_mgr.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/linux.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/base.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/darwin.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/dragonfly.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/ssh_pub_keys.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/lsb.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/date_time.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/netbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/base.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/env.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/freebsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/netbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/hardware/netbsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/caps.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/dns.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/sunos.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/system/python.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/network/generic_bsd.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/virtual/sysctl.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/utils.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/facts/sysctl.py
+Using module file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/modules/system/setup.py
+<127.0.0.1> PUT /home/ansible-host/.ansible/tmp/ansible-local-32066c7tvIA/tmpKblrJz TO /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502/AnsiballZ_setup.py
+<127.0.0.1> EXEC /bin/sh -c 'chmod u+x /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502/ /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502/AnsiballZ_setup.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '/usr/bin/python /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502/AnsiballZ_setup.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c 'rm -f -r /home/ansible-host/.ansible/tmp/ansible-tmp-1548338379.96-8982315166502/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost]
+META: ran handlers
+
+TASK [Get facts for a Load Balancers] **********************************************************************************************************************************
+task path: /home/ansible-host/tw-test-devops/test.yml:3
+<127.0.0.1> ESTABLISH LOCAL CONNECTION FOR USER: ansible-host
+<127.0.0.1> EXEC /bin/sh -c 'echo ~ansible-host && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875 `" && echo ansible-tmp-1548338380.57-62363973886875="` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875 `" ) && sleep 0'
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/basic.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/azure_rm_common.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/convert_bool.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/_collections_compat.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/six/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/_text.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/pycompat24.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/process.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/file.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/ansible_release.py
+Using module file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/modules/cloud/azure/azure_rm_loadbalancer_facts.py
+<127.0.0.1> PUT /home/ansible-host/.ansible/tmp/ansible-local-32066c7tvIA/tmpszbNxg TO /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875/AnsiballZ_azure_rm_loadbalancer_facts.py
+<127.0.0.1> EXEC /bin/sh -c 'chmod u+x /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875/ /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875/AnsiballZ_azure_rm_loadbalancer_facts.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '/usr/bin/python /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875/AnsiballZ_azure_rm_loadbalancer_facts.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c 'rm -f -r /home/ansible-host/.ansible/tmp/ansible-tmp-1548338380.57-62363973886875/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost] => {
+    "ansible_facts": {
+        "azure_loadbalancers": [
+            {
+                "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB", 
+                "location": "westus", 
+                "name": "devBlueLB", 
+                "properties": {
+                    "backendAddressPools": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/backendAddressPools/devBlueSS", 
+                            "name": "devBlueSS", 
+                            "properties": {
+                                "backendIPConfigurations": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Compute/virtualMachineScaleSets/devBlueSS/virtualMachines/0/networkInterfaces/devBlueSS/ipConfigurations/default"
+                                    }, 
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Compute/virtualMachineScaleSets/devBlueSS/virtualMachines/1/networkInterfaces/devBlueSS/ipConfigurations/default"
+                                    }
+                                ], 
+                                "loadBalancingRules": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/loadBalancingRules/devBlueSS"
+                                    }
+                                ], 
+                                "provisioningState": "Succeeded"
+                            }
+                        }
+                    ], 
+                    "frontendIPConfigurations": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/frontendIPConfigurations/devBlueSS", 
+                            "name": "devBlueSS", 
+                            "properties": {
+                                "inboundNatPools": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatPools/devBlueSS"
+                                    }
+                                ], 
+                                "inboundNatRules": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatRules/devBlueSS.0"
+                                    }, 
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatRules/devBlueSS.1"
+                                    }
+                                ], 
+                                "loadBalancingRules": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/loadBalancingRules/devBlueSS"
+                                    }
+                                ], 
+                                "privateIPAllocationMethod": "Dynamic", 
+                                "provisioningState": "Succeeded", 
+                                "publicIPAddress": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/publicIPAddresses/devBlueSS"
+                                }
+                            }
+                        }
+                    ], 
+                    "inboundNatPools": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatPools/devBlueSS", 
+                            "name": "devBlueSS", 
+                            "properties": {
+                                "backendPort": 22, 
+                                "frontendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/frontendIPConfigurations/devBlueSS"
+                                }, 
+                                "frontendPortRangeEnd": 50040, 
+                                "frontendPortRangeStart": 50000, 
+                                "protocol": "Tcp", 
+                                "provisioningState": "Succeeded"
+                            }
+                        }
+                    ], 
+                    "inboundNatRules": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatRules/devBlueSS.0", 
+                            "name": "devBlueSS.0", 
+                            "properties": {
+                                "backendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Compute/virtualMachineScaleSets/devBlueSS/virtualMachines/0/networkInterfaces/devBlueSS/ipConfigurations/default"
+                                }, 
+                                "backendPort": 22, 
+                                "enableFloatingIP": false, 
+                                "frontendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/frontendIPConfigurations/devBlueSS"
+                                }, 
+                                "frontendPort": 50000, 
+                                "idleTimeoutInMinutes": 4, 
+                                "protocol": "Tcp", 
+                                "provisioningState": "Succeeded"
+                            }
+                        }, 
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatRules/devBlueSS.1", 
+                            "name": "devBlueSS.1", 
+                            "properties": {
+                                "backendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Compute/virtualMachineScaleSets/devBlueSS/virtualMachines/1/networkInterfaces/devBlueSS/ipConfigurations/default"
+                                }, 
+                                "backendPort": 22, 
+                                "enableFloatingIP": false, 
+                                "frontendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/frontendIPConfigurations/devBlueSS"
+                                }, 
+                                "frontendPort": 50001, 
+                                "idleTimeoutInMinutes": 4, 
+                                "protocol": "Tcp", 
+                                "provisioningState": "Succeeded"
+                            }
+                        }
+                    ], 
+                    "loadBalancingRules": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/loadBalancingRules/devBlueSS", 
+                            "name": "devBlueSS", 
+                            "properties": {
+                                "backendAddressPool": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/backendAddressPools/devBlueSS"
+                                }, 
+                                "backendPort": 8080, 
+                                "enableFloatingIP": false, 
+                                "frontendIPConfiguration": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/frontendIPConfigurations/devBlueSS"
+                                }, 
+                                "frontendPort": 80, 
+                                "idleTimeoutInMinutes": 4, 
+                                "loadDistribution": "Default", 
+                                "probe": {
+                                    "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/probes/devBlueSS"
+                                }, 
+                                "protocol": "Tcp", 
+                                "provisioningState": "Succeeded"
+                            }
+                        }
+                    ], 
+                    "probes": [
+                        {
+                            "etag": "W/\"8c3664c4-af53-49f0-9c89-ca17c537b0eb\"", 
+                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/probes/devBlueSS", 
+                            "name": "devBlueSS", 
+                            "properties": {
+                                "intervalInSeconds": 10, 
+                                "loadBalancingRules": [
+                                    {
+                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/loadBalancingRules/devBlueSS"
+                                    }
+                                ], 
+                                "numberOfProbes": 3, 
+                                "port": 8080, 
+                                "protocol": "Tcp", 
+                                "provisioningState": "Succeeded"
+                            }
+                        }
+                    ], 
+                    "provisioningState": "Succeeded", 
+                    "resourceGuid": "04ca0952-b22d-4ada-af1b-da97bf38f5b3"
+                }, 
+                "sku": {
+                    "name": "Basic"
+                }, 
+                "type": "Microsoft.Network/loadBalancers"
+            }
+        ]
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "ad_user": null, 
+            "adfs_authority_url": null, 
+            "api_profile": "latest", 
+            "auth_source": null, 
+            "cert_validation_mode": null, 
+            "client_id": null, 
+            "cloud_environment": "AzureCloud", 
+            "name": "devBlueLB", 
+            "password": null, 
+            "profile": null, 
+            "resource_group": "dev-tw-blue", 
+            "secret": null, 
+            "subscription_id": null, 
+            "tags": null, 
+            "tenant": null
+        }
+    }
+}
+
+TASK [Get facts for a virtual machine scale set] ***********************************************************************************************************************
+task path: /home/ansible-host/tw-test-devops/test.yml:9
+<127.0.0.1> ESTABLISH LOCAL CONNECTION FOR USER: ansible-host
+<127.0.0.1> EXEC /bin/sh -c 'echo ~ansible-host && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426 `" && echo ansible-tmp-1548338381.57-99831782590426="` echo /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426 `" ) && sleep 0'
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/basic.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/azure_rm_common.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/convert_bool.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/_collections_compat.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/six/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/_text.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/parsing/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/pycompat24.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/process.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/__init__.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/common/file.py
+Using module_utils file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/module_utils/ansible_release.py
+Using module file /home/ansible-host/.local/lib/python2.7/site-packages/ansible/modules/cloud/azure/azure_rm_virtualmachine_scaleset_facts.py
+<127.0.0.1> PUT /home/ansible-host/.ansible/tmp/ansible-local-32066c7tvIA/tmp2mal08 TO /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426/AnsiballZ_azure_rm_virtualmachine_scaleset_facts.py
+<127.0.0.1> EXEC /bin/sh -c 'chmod u+x /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426/ /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426/AnsiballZ_azure_rm_virtualmachine_scaleset_facts.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '/usr/bin/python /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426/AnsiballZ_azure_rm_virtualmachine_scaleset_facts.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c 'rm -f -r /home/ansible-host/.ansible/tmp/ansible-tmp-1548338381.57-99831782590426/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost] => {
+    "ansible_facts": {
+        "azure_vmss": [
+            {
+                "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Compute/virtualMachineScaleSets/devBlueSS", 
+                "location": "westus", 
+                "name": "devBlueSS", 
+                "properties": {
+                    "overprovision": true, 
+                    "provisioningState": "Succeeded", 
+                    "singlePlacementGroup": true, 
+                    "uniqueId": "899d92b0-e74a-4dda-a485-87e7e2808fbe", 
+                    "upgradePolicy": {
+                        "mode": "Manual"
+                    }, 
+                    "virtualMachineProfile": {
+                        "networkProfile": {
+                            "networkInterfaceConfigurations": [
+                                {
+                                    "name": "devBlueSS", 
+                                    "properties": {
+                                        "dnsSettings": {
+                                            "dnsServers": []
+                                        }, 
+                                        "enableAcceleratedNetworking": false, 
+                                        "ipConfigurations": [
+                                            {
+                                                "name": "default", 
+                                                "properties": {
+                                                    "loadBalancerBackendAddressPools": [
+                                                        {
+                                                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/backendAddressPools/devBlueSS"
+                                                        }
+                                                    ], 
+                                                    "loadBalancerInboundNatPools": [
+                                                        {
+                                                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/loadBalancers/devBlueLB/inboundNatPools/devBlueSS"
+                                                        }
+                                                    ], 
+                                                    "primary": true, 
+                                                    "privateIPAddressVersion": "IPv4", 
+                                                    "subnet": {
+                                                        "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/virtualNetworks/devBlueSS/subnets/devBlueSS"
+                                                    }
+                                                }
+                                            }
+                                        ], 
+                                        "networkSecurityGroup": {
+                                            "id": "/subscriptions/f9681d71-f1ef-412e-b4a0-f79e2e9507b4/resourceGroups/dev-tw-blue/providers/Microsoft.Network/networkSecurityGroups/devBlueSS"
+                                        }, 
+                                        "primary": true
+                                    }
+                                }
+                            ]
+                        }, 
+                        "osProfile": {
+                            "adminUsername": "tw_test_devops_admin", 
+                            "computerNamePrefix": "devBlueSS", 
+                            "linuxConfiguration": {
+                                "disablePasswordAuthentication": false
+                            }, 
+                            "secrets": []
+                        }, 
+                        "storageProfile": {
+                            "dataDisks": [
+                                {
+                                    "caching": "ReadOnly", 
+                                    "createOption": "empty", 
+                                    "diskSizeGB": 20, 
+                                    "lun": 0, 
+                                    "managedDisk": {
+                                        "storageAccountType": "Standard_LRS"
+                                    }
+                                }, 
+                                {
+                                    "caching": "ReadOnly", 
+                                    "createOption": "empty", 
+                                    "diskSizeGB": 30, 
+                                    "lun": 1, 
+                                    "managedDisk": {
+                                        "storageAccountType": "Standard_LRS"
+                                    }
+                                }
+                            ], 
+                            "imageReference": {
+                                "offer": "UbuntuServer", 
+                                "publisher": "Canonical", 
+                                "sku": "18.04-LTS", 
+                                "version": "18.04.201901220"
+                            }, 
+                            "osDisk": {
+                                "caching": "ReadWrite", 
+                                "createOption": "fromImage", 
+                                "managedDisk": {
+                                    "storageAccountType": "Standard_LRS"
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "sku": {
+                    "capacity": 2, 
+                    "name": "Standard_B1s", 
+                    "tier": "Standard"
+                }, 
+                "tags": {
+                    "env": "dev_webApp"
+                }, 
+                "type": "Microsoft.Compute/virtualMachineScaleSets"
+            }
+        ]
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "ad_user": null, 
+            "adfs_authority_url": null, 
+            "api_profile": "latest", 
+            "auth_source": null, 
+            "cert_validation_mode": null, 
+            "client_id": null, 
+            "cloud_environment": "AzureCloud", 
+            "format": "raw", 
+            "name": "devBlueSS", 
+            "password": null, 
+            "profile": null, 
+            "resource_group": "dev-tw-blue", 
+            "secret": null, 
+            "subscription_id": null, 
+            "tags": null, 
+            "tenant": null
+        }
+    }
+}
+META: ran handlers
+META: ran handlers
+
+PLAY RECAP *************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0   
+
