@@ -9,7 +9,7 @@
     name: "{{ vmssName }}"
   register: public_ip_adress_facts
 
-  - name: Create a resource group
+- name: Create a resource group
   azure_rm_resourcegroup:
     name: "{{ tf_resourceGroup }}"
     location: "{{ tf_location }}"
