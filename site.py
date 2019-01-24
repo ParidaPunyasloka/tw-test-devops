@@ -128,13 +128,13 @@ def deploymentTypeSelection(x):
 
         
 def httpd_blue():
-    cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,static_scale"'
+    cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,static_scale"'
     subprocess.call(cmd, shell=True) 
 def httpd_green():
     cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,static_scale"'
     subprocess.call(cmd, shell=True) 
 def tomcat_blue():
-    cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,web_scale"'
+    cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,web_scale"'
     subprocess.call(cmd, shell=True) 
 def tomcat_green():
     cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"'
