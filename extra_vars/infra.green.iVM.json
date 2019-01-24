@@ -4,7 +4,7 @@
     "vmssName": "devgreenSS",
     "vmssLbName": "devgreenLB",
     "vmStandardSize": "Standard_B1s",
-    "storageAccountName": "devtwstorageaccountivm1",
+    "storageAccountName": "devtwstorageaccountivm2",
     "virtualNetwork": "devtwvnivm001",
     "subnetName": "devtwsubnetivm001",
     "publicIPName": "devtwpublicipivm001",
