@@ -277,10 +277,10 @@ def vmScaleSet():
 
         
 def blueInfraIndividualVM():
-    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_vm"'
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "dev_vm"'
     subprocess.call(cmd, shell=True)
 def greenInfraIndividualVM():
-    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "dev_vm"'
+    cmd = 'ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "dev_vm"'
     subprocess.call(cmd, shell=True)
 def blueGreenSelectionIndividualVM(x):
     if(x==1):
