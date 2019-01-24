@@ -28,14 +28,14 @@ def staticappDeployment(x):
         print('Invalid Option! Exiting')
         exit(0)
 def webapp_vmset():
-    webappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green VM\n\nType an option (1 or 2) and hit ENTER: ")
+    webappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if webappdeploymentType:
         webappDeployment(webappdeploymentType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)
 def staticapp_vmset():
-    staticappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green VM\n\nType an option (1 or 2) and hit ENTER: ")
+    staticappdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if staticappdeploymentType:
         staticappDeployment(staticappdeploymentType)    
     else:
@@ -115,14 +115,14 @@ def httpdDeployment(x):
         print('Invalid Option! Exiting')
         exit(0)
 def tomcat_vmset():
-    tomcatdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green VM\n\nType an option (1 or 2) and hit ENTER: ")
+    tomcatdeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if tomcatdeploymentType:
         tomcatDeployment(tomcatdeploymentType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)
 def httpd_vmset():
-    httpddeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green VM\n\nType an option (1 or 2) and hit ENTER: ")
+    httpddeploymentType = input("\nWhat kind of  Infra do you want this Application to be installed in ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if httpddeploymentType:
         httpdDeployment(httpddeploymentType)    
     else:
@@ -187,7 +187,7 @@ def blueGreenSelection(x):
         print('Invalid Option! Exiting')
         exit(0)
 def vmScaleSet():
-    blueGreenType = input("\nWhich group do you want your Infra to be part of ?\n\n1)Blue\n2)Green VM\n\nType an option (1 or 2) and hit ENTER: ")
+    blueGreenType = input("\nWhich group do you want your Infra to be part of ?\n\n1)Blue\n2)Green \n\nType an option (1 or 2) and hit ENTER: ")
     if blueGreenType:
         blueGreenSelection(blueGreenType)    
     else:
