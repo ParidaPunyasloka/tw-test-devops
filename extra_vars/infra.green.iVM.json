@@ -1,0 +1,23 @@
+{
+    "resourceGroup": "dev-tw-green",
+    "location": "centralus",
+    "vmssName": "devgreenSS",
+    "vmssLbName": "devgreenLB",
+    "vmStandardSize": "Standard_B1s",
+    "storageAccountName": "devtwstorageaccount001",
+    "virtualNetwork": "devtwvnivm001",
+    "subnetName": "devtwsubnetivm001",
+    "publicIPName": "devtwpublicipivm001",
+    "securityGroupName": "devtwsecgroup001",
+    "networkInferace": "devtwnicivm001",
+    "VMName": "devWebAppivm01",
+    "ipconfigurationName": "ip_config_dev_webivm",
+    "type": "dev_webApp",
+    "domainName": "devwebivmgreen",
+    "tf_resourceGroup": "blue-green-tf-rg",
+    "tf_name": "blue-green",
+    "tf_dns_name": "blue-green-tw",
+    "tf_endPointName": "green-endpoint",
+    "tf_weight": "10"
+    
+}
