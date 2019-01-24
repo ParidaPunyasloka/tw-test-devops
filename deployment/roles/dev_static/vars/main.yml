@@ -1,0 +1,4 @@
+webapp_source_file_path: "~/artifacts/static.zip"
+webapp_destination_folder: "/var/www"
+webapp_destination_file_path: "{{ webapp_destination_folder }}/static.zip"
+

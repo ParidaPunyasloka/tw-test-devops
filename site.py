@@ -1,12 +1,12 @@
 import subprocess
 def staticapp_blue():
-    cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,static_scale"'
+    cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,static_scale"'
     subprocess.call(cmd, shell=True) 
 def staticapp_green():
     cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,static_scale"'
     subprocess.call(cmd, shell=True) 
 def webapp_blue():
-    cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set,web_scale"'
+    cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,web_scale"'
     subprocess.call(cmd, shell=True) 
 def webapp_green():
     cmd = 'ansible-playbook deployment/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"'
@@ -104,14 +104,14 @@ def CodeDeployment(x):
         exit(0)
 
 def vmScaleSetdeployment():
-    vmScaleSetDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) VM\n\nType an option (1 or 2) and hit ENTER: ")
+    vmScaleSetDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) \n\nType an option (1 or 2) and hit ENTER: ")
     if vmScaleSetDeploymentAppType:
         CodeDeployment_vmset(vmScaleSetDeploymentAppType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)   
 def individualVMdeployment():
-    individualVMDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) VM\n\nType an option (1 or 2) and hit ENTER: ")
+    individualVMDeploymentAppType = input("\nWhat do you want to deploy ?\n\n1)WebApp\n2)Static-WebApp(Staic Files) \n\nType an option (1 or 2) and hit ENTER: ")
     if individualVMDeploymentAppType:
         CodeDeployment(individualVMDeploymentAppType)    
     else:
@@ -230,14 +230,14 @@ def ApplicationInstallation(x):
         print('Invalid Option! Exiting')
         exit(0)
 def vmScaleSetprovision():
-    ApplicationType = input("\nWhat Application do you want to provision ?\n\n1)Apache Tomcat\n2)Apache HTTP server VM\n\nType an option (1 or 2) and hit ENTER: ")
+    ApplicationType = input("\nWhat Application do you want to provision ?\n\n1)Apache Tomcat\n2)Apache HTTP server \n\nType an option (1 or 2) and hit ENTER: ")
     if ApplicationType:
         ApplicationInstallation_vmset(ApplicationType)    
     else:
         print("\nNo Option Selected. Exiting the Interactive session.GoodBye!") 
         exit(0)   
 def individualVMprovision():
-    ApplicationType = input("\nWhat Application do you want to provision ?\n\n1)Apache Tomcat\n2)Apache HTTP server VM\n\nType an option (1 or 2) and hit ENTER: ")
+    ApplicationType = input("\nWhat Application do you want to provision ?\n\n1)Apache Tomcat\n2)Apache HTTP server \n\nType an option (1 or 2) and hit ENTER: ")
     if ApplicationType:
         ApplicationInstallation(ApplicationType)    
     else:
