@@ -17,10 +17,10 @@ provisionTypeSelection= {
     '2': individualVMprovision()
 }
 def vmScaleSet():
-    subprocess.run(["ansible-playbook", 'infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set"'])
+    subprocess.call(["ansible-playbook", "infra/site.yml", "--vault-id", "ansible-vault-pass", "--extra-vars", '"@extra_vars/infra.blue.json"', "--tags", '"dev_scale_set"'])
      
 def individualVM():
-    subprocess.run(["ansible-playbook", 'infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.json" --tags "dev_scale_set"'])
+    subprocess.call(["ansible-playbook", "infra/site.yml", "--vault-id", "ansible-vault-pass", "--extra-vars", '"@extra_vars/infra.blue.json"', "--tags", '"dev_vm"'])
 infraTypeSelection = {
     '1': vmScaleSet(),
     '2': individualVM()
