@@ -19,7 +19,8 @@ Pre-Requisites:
 * The site can also be accessed via the public IP of the load balancer. 
 
 
-The Script **site.py** is a wrapper script to perform all these operations and is self-explainatory. All you need to do is *python site.py* in the ansible host machine to get going.
+The Script **site.py** is a wrapper script to perform all these operations and is self-explainatory. All you need to do is 
+*python site.py* in the ansible host machine to get going.
 
 However, I will walkthrough what the various ansible commands that the script executes to performs these operations
 
