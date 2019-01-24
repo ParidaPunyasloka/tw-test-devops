@@ -13,16 +13,16 @@ def webapp_green():
     subprocess.call(cmd, shell=True) 
 
 def staticapp_blue_iVM():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "static"'
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "static"'
     subprocess.call(cmd, shell=True) 
 def staticapp_green_iVM():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "static"'
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "static"'
     subprocess.call(cmd, shell=True) 
 def webapp_blue_iVM():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "web"'
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "web"'
     subprocess.call(cmd, shell=True)  
 def webapp_green_iVM():
-    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "web"'
+    cmd = 'ansible-playbook deployment/site.yml -i deployment/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "web"'
     subprocess.call(cmd, shell=True) 
 
 def webappDeployment(x):
@@ -140,16 +140,16 @@ def tomcat_green():
     cmd = 'ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"'
     subprocess.call(cmd, shell=True) 
 def httpd_blue_iVM():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "static"'
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "static"'
     subprocess.call(cmd, shell=True)  
 def httpd_green_iVM():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "static"'
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "static"'
     subprocess.call(cmd, shell=True) 
 def tomcat_blue_iVM():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "web"'
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "web"'
     subprocess.call(cmd, shell=True) 
 def tomcat_green_iVM():
-    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "web"'
+    cmd = 'ansible-playbook provision/site.yml -i provision/inventory/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "web"'
     subprocess.call(cmd, shell=True) 
 def tomcatDeployment(x):
     if(x==1):
