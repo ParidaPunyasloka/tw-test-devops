@@ -3,6 +3,18 @@
   include_vars:
     file: "../vars/secure.yml"
 
+- name: Get facts for a Load Balancers
+  azure_rm_loadbalancer_facts:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssLbName }}"
+  register: VMLbFacts
+
+- name: Get facts for a virtual machine scale set
+  azure_rm_virtualmachine_scaleset_facts:
+    resource_group: "{{ resourceGroup }}"
+    name: "{{ vmssName }}"
+  register: VMScaleSetFacts
+
 - name: Create a resource group
   azure_rm_resourcegroup:
     name: "{{ tf_resourceGroup }}"
@@ -32,4 +44,5 @@
       type: azure_endpoints
       priority: 2
       weight: "{{ tf_weight }}"
+      target_resource_id: "{{ VMScaleSetFacts.azure_vmss[0].id }}"
       target: "{{ domainName }}.{{ location }}.cloudapp.azure.com"
