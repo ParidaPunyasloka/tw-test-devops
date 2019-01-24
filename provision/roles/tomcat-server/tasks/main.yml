@@ -96,6 +96,7 @@
 - name: Create Key for Self-Signed certificates
   command: /usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/keytool -genkey -keystore /opt/tomcat/.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias app -dname "cn=Unknown, ou=Unknown, o=Unknown, c=Unknown" -storepass {{ admin_password }} -keypass {{ admin_password }}
   register: keytool_key
+  become: yes
 
 - name: Configure Tomcat users
   template: src=tomcat-users.xml dest=/opt/tomcat/conf/
