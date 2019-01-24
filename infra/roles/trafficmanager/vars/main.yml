@@ -1,6 +1,6 @@
 tf_resourceGroup: blue-green-tf-rg
 tf_name: blue-green
 tf_dns_name: blue-green-tw
-tf_profileName: bg-profile-tf
 tf_endPointName: blue-endpoint
 tf_weight: 90
+tf_location: northcentralus

@@ -17,8 +17,8 @@
     "tf_resourceGroup": "blue-green-tf-rg",
     "tf_name": "blue-green",
     "tf_dns_name": "blue-green-tw",
-    "tf_profileName": "bg-profile-tf",
     "tf_endPointName": "green-endpoint",
-    "tf_weight": "10"
+    "tf_weight": "10",
+    "tf_location": "northcentralus"
     
 }
