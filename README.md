@@ -21,5 +21,28 @@ ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@ext
 ## Creating the VM for static App deployment in the GREEN Infrastructre
 ansible-playbook infra/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "dev_vm"
 
-ansible-playbook infra/site.yml --ask-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "dev_scale_set"
-ansible-playbook infra/site.yml --ask-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "dev_vm"
+## Provisioning the BLUE VM scalesets that require Apache HTTP server
+ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,static_scale"
+
+
+## Provisioning the GREEN VM scalesets that require Apache HTTP server
+ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,static_scale"
+
+## Provisioning the BLUE VM scalesets that require Apache Tomcat
+ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.json" --tags "scale_set_inv,web_scale"
+
+## Provisioning the GREEN VM scalesets that require Apache Tomcat
+ansible-playbook provision/site.yml --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.json" --tags "scale_set_inv,web_scale"
+
+## Provisioning the BLUE Individual VMs that require Apache HTTP Server
+ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "static"
+
+## Provisioning the GREEN Individual VMs that require Apache HTTP Server
+ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "static"
+
+## Provisioning the BLUE Individual VMs that require Apache Tomcat
+ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.blue.iVM.json" --tags "web"
+
+## Provisioning the GREEN Individual VMs that require Apache Tomcat
+ansible-playbook provision/site.yml -i provision/inv/azure_rm.py --vault-id ansible-vault-pass --extra-vars "@extra_vars/infra.green.iVM.json" --tags "web"'
+
