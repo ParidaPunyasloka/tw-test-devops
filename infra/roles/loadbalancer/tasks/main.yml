@@ -67,8 +67,8 @@
   command: az network lb rule create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }}_HTTP --protocol tcp --frontend-port 80 --backend-port 8080 --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --probe-name {{ vmssName }} --load-distribution Default --idle-timeout 4
 
 - name: Create Load Balancer Rule 2
-  command: az network lb rule create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }}_HTTPS --protocol tcp --frontend-port 80 --backend-port 8080 --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --probe-name {{ vmssName }} --load-distribution Default --idle-timeout 4
-  
+  command: az network lb rule create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }}_HTTPS --protocol tcp --frontend-port 443 --backend-port 8443 --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --probe-name {{ vmssName }} --load-distribution Default --idle-timeout 4
+
 - name: Create inbound NAT pool
   command: az network lb inbound-nat-pool create --backend-port 22 --frontend-port-range-end 50040 --frontend-port-range-start 50000 --lb-name {{ vmssLbName }} --name {{ vmssName }} --protocol Tcp --resource-group {{ resourceGroup }} --frontend-ip-name {{ vmssName }}
 
