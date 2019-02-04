@@ -53,46 +53,65 @@
     virtual_network: "{{ vmssName }}"
     security_group: "{{ vmssName }}"
 
-- name: Create a load balancer
-  azure_rm_loadbalancer:
-    name: "{{ vmssLbName }}"
-    location: "{{ location }}"
-    resource_group: "{{ resourceGroup }}"
-    backend_address_pools:
-      - name: "{{ vmssName }}"
-    frontend_ip_configurations:
-      - name: "{{ vmssName }}"
-        private_ip_allocation_method: Dynamic
-        public_ip_address: "{{ vmssName }}"
-    probes:
-      - name: "{{ vmssName }}"
-        protocol: Tcp
-        port: 8080
-        interval: 10
-        fail_count: 3
-    load_balancing_rules:
-      - name: "{{ vmssName }}"
-        load_distribution: Default      
-        frontend_ip_configuration: "{{ vmssName }}"
-        probe: "{{ vmssName }}"
-        backend_address_pool : "{{ vmssName }}"
-        frontend_port: 80    
-        idle_timeout: 4
-        backend_port: 8080
-        protocol: Tcp
-      - name: "{{ vmssName }}_2"
-        load_distribution: Default      
-        frontend_ip_configuration: "{{ vmssName }}"
-        probe: "{{ vmssName }}"
-        backend_address_pool : "{{ vmssName }}"
-        frontend_port: 443   
-        idle_timeout: 4
-        backend_port: 8443
-        protocol: Tcp
-    inbound_nat_pools:
-      - name: "{{ vmssName }}"
-        backend_port: 22
-        frontend_port_range_start: 50000
-        frontend_port_range_end : 50040
-        frontend_ip_configuration_name: "{{ vmssName }}"
-        protocol: Tcp
+
+- name: Azure login
+  command: az login --service-principal -u {{ AZURE_CLIENT_ID }} -p {{ AZURE_SECRET }} --tenant {{ AZURE_TENANT }}
+
+- name: Create Network Load Balancer
+  command: az network lb create --resource-group {{ resourceGroup }} --name {{ vmssLbName }} --public-ip-address {{ vmssName }} --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --public-ip-address-allocation Static
+
+- name: Create Load Balancer Probe
+  command: az network lb probe create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }} --protocol tcp --port 8080 --interval 10 --threshold 3
+
+- name: Create Load Balancer Rule
+  command: az network lb rule create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }}_HTTP --protocol tcp --frontend-port 80 --backend-port 8080 --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --probe-name {{ vmssName }} --load-distribution Default --idle-timeout 4
+
+- name: Create Load Balancer Rule 2
+  command: az network lb rule create --resource-group {{ resourceGroup }} --lb-name {{ vmssLbName }} --name {{ vmssName }}_HTTPS --protocol tcp --frontend-port 80 --backend-port 8080 --frontend-ip-name {{ vmssName }} --backend-pool-name {{ vmssName }} --probe-name {{ vmssName }} --load-distribution Default --idle-timeout 4
+  
+- name: Create inbound NAT pool
+  command: az network lb inbound-nat-pool create --backend-port 22 --frontend-port-range-end 50040 --frontend-port-range-start 50000 --lb-name {{ vmssLbName }} --name {{ vmssName }} --protocol Tcp --resource-group {{ resourceGroup }} --frontend-ip-name {{ vmssName }}
+
+#- name: Create a load balancer
+#  azure_rm_loadbalancer:
+#    name: "{{ vmssLbName }}"
+#    location: "{{ location }}"
+#    resource_group: "{{ resourceGroup }}"
+#    backend_address_pools:
+#      - name: "{{ vmssName }}"
+#    frontend_ip_configurations:
+#      - name: "{{ vmssName }}"
+#        private_ip_allocation_method: Dynamic
+#        public_ip_address: "{{ vmssName }}"
+#    probes:
+#      - name: "{{ vmssName }}"
+#        protocol: Tcp
+#        port: 8080
+#        interval: 10
+#        fail_count: 3
+#    load_balancing_rules:
+#      - name: "{{ vmssName }}"
+#        load_distribution: Default      
+#        frontend_ip_configuration: "{{ vmssName }}"
+#        probe: "{{ vmssName }}"
+#        backend_address_pool : "{{ vmssName }}"
+#        frontend_port: 80    
+#        idle_timeout: 4
+#        backend_port: 8080
+#        protocol: Tcp
+#      - name: "{{ vmssName }}_2"
+#        load_distribution: Default      
+#        frontend_ip_configuration: "{{ vmssName }}"
+#        probe: "{{ vmssName }}"
+#        backend_address_pool : "{{ vmssName }}"
+#        frontend_port: 443   
+#        idle_timeout: 4
+#        backend_port: 8443
+#        protocol: Tcp
+#    inbound_nat_pools:
+#      - name: "{{ vmssName }}"
+#        backend_port: 22
+#        frontend_port_range_start: 50000
+#        frontend_port_range_end : 50040
+#        frontend_ip_configuration_name: "{{ vmssName }}"
+#        protocol: Tcp
